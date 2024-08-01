@@ -9,6 +9,7 @@ loader.inflector.inflect(
 loader.setup # ready!
 
 module PhlexyUI
+  extend Configurable
   extend Phlex::Kit
 end
 
