@@ -11,6 +11,8 @@ loader.setup # ready!
 module PhlexyUI
   extend Configurable
   extend Phlex::Kit
+
+  autoload :Button, "phlexy_ui/button"
 end
 
 loader.eager_load
