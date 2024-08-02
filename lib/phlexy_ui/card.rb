@@ -2,8 +2,52 @@
 
 module PhlexyUI
   class Card < Base
-    CONDITIONS_CLASSES = {
-      # Modifiers
+    def initialize(*, as: :section, **)
+      super(*, **)
+      @as = as
+    end
+
+    def view_template(&)
+      generate_classes!(
+        component_html_class: :card,
+        modifiers_map: CARD_MODIFIERS_MAP,
+        base_modifiers:,
+        options:
+      ).then do |classes|
+        public_send(as, class: classes, **options, &)
+      end
+    end
+
+    def body(**options, &)
+      generate_classes!(
+        component_html_class: :"card-body",
+        options:
+      ).then do |classes|
+        div(class: classes, **options, &)
+      end
+    end
+
+    def title(**options, &)
+      generate_classes!(
+        component_html_class: :"card-title",
+        options:
+      ).then do |classes|
+        header(class: classes, **options, &)
+      end
+    end
+
+    def actions(**options, &)
+      generate_classes!(
+        component_html_class: :"card-actions",
+        options:
+      ).then do |classes|
+        footer(class: classes, **options, &)
+      end
+    end
+
+    private
+
+    CARD_MODIFIERS_MAP = {
       image_full: "image-full",
       bordered: "card-bordered",
       normal: "card-normal",
@@ -11,34 +55,5 @@ module PhlexyUI
       side: "card-side",
       glass: "glass"
     }.freeze
-
-    BASE_HTML_CLASS = "card"
-
-    def initialize(*, as: :section, **)
-      super(*, **)
-      @as = as
-    end
-
-    def view_template(&)
-      public_send(as, class: classes, data: data, &)
-    end
-
-    def body(**options, &)
-      classes = ["card-body", options.delete(:class)]
-
-      div(class: classes, **options, &)
-    end
-
-    def title(**options, &)
-      classes = ["card-title", options.delete(:class)]
-
-      header(class: classes, **options, &)
-    end
-
-    def actions(**options, &)
-      classes = ["card-actions", options.delete(:class)]
-
-      footer(class: classes, **options, &)
-    end
   end
 end

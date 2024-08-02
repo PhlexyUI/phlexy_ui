@@ -53,8 +53,6 @@ describe PhlexyUI::Button do
     end
 
     context "when condition doesn't exist" do
-      subject(:output) { render described_class.new(:foo) }
-
       it "raises an error" do
         expect { render described_class.new(:foo) }
           .to raise_error(

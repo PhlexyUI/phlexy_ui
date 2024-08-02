@@ -2,7 +2,25 @@
 
 module PhlexyUI
   class Button < Base
-    CONDITIONS_CLASSES = {
+    def initialize(*, as: :button, **)
+      super(*, **)
+      @as = as
+    end
+
+    def view_template(&)
+      generate_classes!(
+        component_html_class: :btn,
+        modifiers_map: BUTTON_MODIFIERS_MAP,
+        base_modifiers:,
+        options:
+      ).then do |classes|
+        public_send(as, class: classes, **options, &)
+      end
+    end
+
+    private
+
+    BUTTON_MODIFIERS_MAP = {
       # Modifiers
       no_animation: "no-animation",
       glass: "glass",
@@ -29,11 +47,5 @@ module PhlexyUI
       warning: "btn-warning",
       error: "btn-error"
     }.freeze
-
-    BASE_HTML_CLASS = "btn"
-
-    def view_template(&)
-      button(class: classes, data:, &)
-    end
   end
 end

@@ -2,47 +2,60 @@
 
 module PhlexyUI
   class Base < Phlex::HTML
-    def initialize(*normal_conditions, sm: [], md: [], lg: [], **options)
-      @normal_conditions = normal_conditions
-      @sm_conditions = Array(sm)
-      @md_conditions = Array(md)
-      @lg_conditions = Array(lg)
+    RESPONSIVE_PREFIXES = %i[sm md lg].freeze
+
+    def initialize(*base_modifiers, **options)
+      @base_modifiers = base_modifiers
       @options = options
-      @data = options.delete(:data)
     end
 
     private
 
-    attr_reader :normal_conditions,
-      :sm_conditions,
-      :md_conditions,
-      :lg_conditions,
-      :options,
-      :data,
-      :as
+    attr_reader :base_modifiers, :options, :as, :id
 
-    def classes
+    def generate_classes!(
+      component_html_class:,
+      base_modifiers: [],
+      options: {},
+      modifiers_map: {}
+    )
       [
-        prefixed(self.class::BASE_HTML_CLASS),
-        *html_classes_for_conditions(normal_conditions),
-        *html_classes_for_conditions(sm_conditions, responsive_prefix: :sm),
-        *html_classes_for_conditions(md_conditions, responsive_prefix: :md),
-        *html_classes_for_conditions(lg_conditions, responsive_prefix: :lg)
+        with_config_prefix(component_html_class),
+        *html_classes_for_modifiers(base_modifiers, modifiers_map),
+        *responsive_html_classes_for_modifiers!(options, modifiers_map),
+        options.delete(:class)
       ]
     end
 
-    def html_classes_for_conditions(conditions, responsive_prefix: nil)
-      conditions.map do |condition|
-        class_name = prefixed self.class::CONDITIONS_CLASSES.fetch(condition)
+    def responsive_html_classes_for_modifiers!(options, modifiers_map)
+      options_to_responsive_modifiers_hash!(options).flat_map do |responsive_prefix, modifiers|
+        html_classes_for_modifiers(modifiers, modifiers_map, responsive_prefix:)
+      end
+    end
 
-        responsive_prefix ? "#{responsive_prefix}:#{class_name}" : class_name
+    def options_to_responsive_modifiers_hash!(options)
+      RESPONSIVE_PREFIXES.to_h do |responsive_prefix|
+        [responsive_prefix, Array(options.delete(responsive_prefix))]
+      end
+    end
+
+    def html_classes_for_modifiers(modifiers, modifiers_map, responsive_prefix: nil)
+      modifiers.map do |modifier|
+        with_responsive_prefix(
+          with_config_prefix(modifiers_map.fetch(modifier)),
+          responsive_prefix:
+        )
       end
     rescue KeyError => e
       raise ArgumentError, "Condition `#{e.key}` is not defined for #{self.class}"
     end
 
-    def prefixed(string)
+    def with_config_prefix(string)
       "#{PhlexyUI.configuration.prefix}#{string}"
+    end
+
+    def with_responsive_prefix(string, responsive_prefix: nil)
+      responsive_prefix ? "#{responsive_prefix}:#{string}" : string
     end
   end
 end
