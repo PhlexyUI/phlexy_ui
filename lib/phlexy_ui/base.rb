@@ -18,7 +18,8 @@ module PhlexyUI
       :md_conditions,
       :lg_conditions,
       :options,
-      :data
+      :data,
+      :as
 
     def classes
       [

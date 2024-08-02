@@ -13,6 +13,7 @@ module PhlexyUI
   extend Phlex::Kit
 
   autoload :Button, "phlexy_ui/button"
+  autoload :Card, "phlexy_ui/card"
 end
 
 loader.eager_load
