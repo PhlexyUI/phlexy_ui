@@ -15,6 +15,7 @@ module PhlexyUI
   autoload :Button, "phlexy_ui/button"
   autoload :Card, "phlexy_ui/card"
   autoload :Tabs, "phlexy_ui/tabs"
+  autoload :Drawer, "phlexy_ui/drawer"
 end
 
 loader.eager_load
