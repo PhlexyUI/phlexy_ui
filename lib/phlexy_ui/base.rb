@@ -14,17 +14,21 @@ module PhlexyUI
     attr_reader :base_modifiers, :options, :as, :id
 
     def generate_classes!(
-      component_html_class:,
+      component_html_class: nil,
       base_modifiers: [],
       options: {},
       modifiers_map: {}
     )
-      [
-        with_config_prefix(component_html_class),
-        *html_classes_for_modifiers(base_modifiers, modifiers_map),
-        *responsive_html_classes_for_modifiers!(options, modifiers_map),
-        options.delete(:class)
-      ]
+      [].then do |classes|
+        if component_html_class
+          classes << with_config_prefix(component_html_class)
+        end
+
+        classes.concat(html_classes_for_modifiers(base_modifiers, modifiers_map))
+        classes.concat(responsive_html_classes_for_modifiers!(options, modifiers_map))
+        classes << options.delete(:class) if options[:class]
+        classes.any? ? classes : nil
+      end
     end
 
     def responsive_html_classes_for_modifiers!(options, modifiers_map)
