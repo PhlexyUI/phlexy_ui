@@ -21,6 +21,7 @@ module PhlexyUI
   autoload :SubMenu, "phlexy_ui/sub_menu"
   autoload :CollapsibleSubMenu, "phlexy_ui/collapsible_sub_menu"
   autoload :Navbar, "phlexy_ui/navbar"
+  autoload :Badge, "phlexy_ui/badge"
 end
 
 loader.eager_load
