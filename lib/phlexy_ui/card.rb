@@ -48,11 +48,29 @@ module PhlexyUI
     private
 
     CARD_MODIFIERS_MAP = {
+      # "sm:image-full"
+      # "md:image-full"
+      # "lg:image-full"
       image_full: "image-full",
+      # "sm:card-bordered"
+      # "md:card-bordered"
+      # "lg:card-bordered"
       bordered: "card-bordered",
+      # "sm:card-normal"
+      # "md:card-normal"
+      # "lg:card-normal"
       normal: "card-normal",
+      # "sm:card-compact"
+      # "md:card-compact"
+      # "lg:card-compact"
       compact: "card-compact",
+      # "sm:card-side"
+      # "md:card-side"
+      # "lg:card-side"
       side: "card-side",
+      # "sm:glass"
+      # "md:glass"
+      # "lg:glass"
       glass: "glass"
     }.freeze
   end

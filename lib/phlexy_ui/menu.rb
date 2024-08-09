@@ -43,17 +43,44 @@ module PhlexyUI
     private
 
     MENU_MODIFIERS_MAP = {
+      # "sm:menu-xs"
+      # "md:menu-xs"
+      # "lg:menu-xs"
       xs: "menu-xs",
+      # "sm:menu-sm"
+      # "md:menu-sm"
+      # "lg:menu-sm"
       sm: "menu-sm",
+      # "sm:menu-md"
+      # "md:menu-md"
+      # "lg:menu-md"
       md: "menu-md",
+      # "sm:menu-lg"
+      # "md:menu-lg"
+      # "lg:menu-lg"
       lg: "menu-lg",
+      # "sm:menu-vertical"
+      # "md:menu-vertical"
+      # "lg:menu-vertical"
       vertical: "menu-vertical",
+      # "sm:menu-horizontal"
+      # "md:menu-horizontal"
+      # "lg:menu-horizontal"
       horizontal: "menu-horizontal"
     }.freeze
 
     MENU_ITEM_MODIFIERS_MAP = {
+      # "sm:disabled"
+      # "md:disabled"
+      # "lg:disabled"
       disabled: "disabled",
+      # "sm:active"
+      # "md:active"
+      # "lg:active"
       active: "active",
+      # "sm:focus"
+      # "md:focus"
+      # "lg:focus"
       focus: "focus"
     }.freeze
   end

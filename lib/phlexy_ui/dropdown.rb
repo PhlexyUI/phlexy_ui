@@ -38,12 +38,33 @@ module PhlexyUI
     private
 
     DROPDOWN_MODIFIERS_MAP = {
+        # "sm:dropdown-end"
+        # "md:dropdown-end"
+        # "lg:dropdown-end"
       end: "dropdown-end",
+      # "sm:dropdown-top"
+      # "md:dropdown-top"
+      # "lg:dropdown-top"
       top: "dropdown-top",
+      # "sm:dropdown-bottom"
+      # "md:dropdown-bottom"
+      # "lg:dropdown-bottom"
       bottom: "dropdown-bottom",
+      # "sm:dropdown-left"
+      # "md:dropdown-left"
+      # "lg:dropdown-left"
       left: "dropdown-left",
+      # "sm:dropdown-right"
+      # "md:dropdown-right"
+      # "lg:dropdown-right"
       right: "dropdown-right",
+      # "sm:dropdown-hover"
+      # "md:dropdown-hover"
+      # "lg:dropdown-hover"
       hover: "dropdown-hover",
+      # "sm:dropdown-open"
+      # "md:dropdown-open"
+      # "lg:dropdown-open"
       open: "dropdown-open"
     }.freeze
   end

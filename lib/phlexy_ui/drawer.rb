@@ -62,7 +62,13 @@ module PhlexyUI
     private
 
     DRAWER_MODIFIERS_MAP = {
+        # "sm:drawer-end",
+        # "md:drawer-end",
+        # "lg:drawer-end",
       end: "drawer-end",
+      # "sm:drawer-open",
+      # "md:drawer-open",
+      # "lg:drawer-open",
       open: "drawer-open"
     }.freeze
   end
