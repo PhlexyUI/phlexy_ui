@@ -17,6 +17,9 @@ module PhlexyUI
   autoload :Tabs, "phlexy_ui/tabs"
   autoload :Drawer, "phlexy_ui/drawer"
   autoload :Dropdown, "phlexy_ui/dropdown"
+  autoload :Menu, "phlexy_ui/menu"
+  autoload :SubMenu, "phlexy_ui/sub_menu"
+  autoload :CollapsibleSubMenu, "phlexy_ui/collapsible_sub_menu"
 end
 
 loader.eager_load
