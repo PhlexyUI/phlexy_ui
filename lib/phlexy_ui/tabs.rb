@@ -2,9 +2,10 @@
 
 module PhlexyUI
   class Tabs < Base
-    def initialize(*, as: :div, **)
+    def initialize(*, id: nil, as: :div, **)
       super(*, **)
       @as = as
+      @id = id
     end
 
     def view_template(&)
@@ -18,24 +19,8 @@ module PhlexyUI
       end
     end
 
-    def tab(*base_modifiers, as: :div, **options, &)
-      generate_classes!(
-        component_html_class: :tab,
-        modifiers_map: TAB_MODIFIERS_CLASSES,
-        base_modifiers:,
-        options:
-      ).then do |classes|
-        public_send(as, role: :tab, class: classes, **options, &)
-      end
-    end
-
-    def content(as: :div, **options, &)
-      generate_classes!(
-        component_html_class: :"tab-content",
-        options:
-      ).then do |classes|
-        public_send(as, role: :tabpanel, class: classes, **options, &)
-      end
+    def tab(*, **, &)
+      render Tab.new(*, id:, **, &)
     end
 
     private
@@ -69,17 +54,6 @@ module PhlexyUI
       # "md:tabs-lg"
       # "lg:tabs-lg"
       lg: "tabs-lg"
-    }.freeze
-
-    TAB_MODIFIERS_CLASSES = {
-      # "sm:tab-active"
-      # "md:tab-active"
-      # "lg:tab-active"
-      active: "tab-active",
-      # "sm:tab-disabled"
-      # "md:tab-disabled"
-      # "lg:tab-disabled"
-      disabled: "tab-disabled"
     }.freeze
   end
 end

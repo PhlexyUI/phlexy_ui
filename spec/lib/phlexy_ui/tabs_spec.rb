@@ -211,31 +211,21 @@ describe PhlexyUI::Tabs do
     end
   end
 
-  describe "rendering full tabs" do
+  describe "rendering full tabs with content" do
     let(:component) do
       Class.new(Phlex::HTML) do
         def view_template(&)
-          render PhlexyUI::Tabs.new(
-            :bordered,
-            sm: [:lifted, :sm],
-            md: :boxed,
-            lg: [:xs],
-            class: "my-tabs",
-            data: {my: "tabs"}
-          ) do |tabs|
-            tabs.tab(
-              :active,
-              class: "my-tab",
-              data: {my: "tabs"},
-              sm: :disabled,
-              md: :active,
-              lg: :disabled
-            ) do
-              "Tab 1"
+          render PhlexyUI::Tabs.new :lifted, id: "my_tabs_2" do |tabs|
+            tabs.tab "Tab 1", :active, data: {my: :tabs} do |tab|
+              tab.content class: "bg-base-100 border-base-300 rounded-box p-6" do
+                "Tab content 1"
+              end
             end
 
-            tabs.content(class: "my-tab-content", data: {my: "tab-contents"}) do
-              "Content 1"
+            tabs.tab "Tab 2", :checked, class: "text-primary" do |tab|
+              tab.content class: "bg-base-100 border-base-300 rounded-box p-6", data: {my: :contents} do
+                "Tab content 2"
+              end
             end
           end
         end
@@ -248,15 +238,34 @@ describe PhlexyUI::Tabs do
 
     it "is expected to match the formatted HTML" do
       expected_html = html <<~HTML
-        <div role="tablist" 
-             class="tabs tabs-bordered sm:tabs-lifted sm:tabs-sm md:tabs-boxed lg:tabs-xs my-tabs" 
-             data-my="tabs">
-          <div role="tab" 
-               class="tab tab-active sm:tab-disabled md:tab-active lg:tab-disabled my-tab" 
-               data-my="tabs">Tab 1</div>
+        <div role="tablist" class="tabs tabs-lifted">
+          <input 
+            type="radio" 
+            name="my_tabs_2" 
+            class="tab tab-active" 
+            role="tab" 
+            aria-label="Tab 1"
+            data-my="tabs">
           <div role="tabpanel" 
-               class="tab-content my-tab-content" 
-               data-my="tab-contents">Content 1</div>
+               class="tab-content 
+                      bg-base-100 
+                      border-base-300 
+                      rounded-box 
+                      p-6">Tab content 1</div>
+
+          <input 
+            type="radio" 
+            name="my_tabs_2" 
+            class="tab text-primary" 
+            role="tab" 
+            aria-label="Tab 2" checked>
+          <div role="tabpanel" 
+               class="tab-content 
+                      bg-base-100 
+                      border-base-300 
+                      rounded-box 
+                      p-6"
+              data-my="contents">Tab content 2</div>
         </div>
       HTML
 
