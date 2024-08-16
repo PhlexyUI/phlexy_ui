@@ -54,7 +54,7 @@ describe PhlexyUI::Menu do
         expect { render described_class.new(:foo) }
           .to raise_error(
             ArgumentError,
-            "Condition `foo` is not defined for PhlexyUI::Menu"
+            "Modifier `foo` is not defined for PhlexyUI::Menu"
           )
       end
     end

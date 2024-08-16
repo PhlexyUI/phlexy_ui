@@ -38,9 +38,9 @@ describe PhlexyUI::Button do
       success: "btn-success",
       warning: "btn-warning",
       error: "btn-error"
-    }.each do |condition, css|
-      context "when given :#{condition} condition" do
-        subject(:output) { render described_class.new(condition) }
+    }.each do |modifier, css|
+      context "when given :#{modifier} modifier" do
+        subject(:output) { render described_class.new(modifier) }
 
         it "renders it apart from the main class" do
           expected_html = html <<~HTML
@@ -52,12 +52,12 @@ describe PhlexyUI::Button do
       end
     end
 
-    context "when condition doesn't exist" do
+    context "when modifier doesn't exist" do
       it "raises an error" do
         expect { render described_class.new(:foo) }
           .to raise_error(
             ArgumentError,
-            "Condition `foo` is not defined for PhlexyUI::Button"
+            "Modifier `foo` is not defined for PhlexyUI::Button"
           )
       end
     end

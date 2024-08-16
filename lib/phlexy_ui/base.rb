@@ -51,7 +51,7 @@ module PhlexyUI
         )
       end
     rescue KeyError => e
-      raise ArgumentError, "Condition `#{e.key}` is not defined for #{self.class}"
+      raise ArgumentError, "Modifier `#{e.key}` is not defined for #{self.class}"
     end
 
     def with_config_prefix(string)

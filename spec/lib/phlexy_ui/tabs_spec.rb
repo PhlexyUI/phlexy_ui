@@ -96,7 +96,7 @@ describe PhlexyUI::Tabs do
         expect { render described_class.new(:foo) }
           .to raise_error(
             ArgumentError,
-            "Condition `foo` is not defined for PhlexyUI::Tabs"
+            "Modifier `foo` is not defined for PhlexyUI::Tabs"
           )
       end
     end

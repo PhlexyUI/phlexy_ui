@@ -26,7 +26,7 @@ describe PhlexyUI::Drawer do
         expect { render described_class.new(:foo, id: :my_drawer) }
           .to raise_error(
             ArgumentError,
-            "Condition `foo` is not defined for PhlexyUI::Drawer"
+            "Modifier `foo` is not defined for PhlexyUI::Drawer"
           )
       end
     end

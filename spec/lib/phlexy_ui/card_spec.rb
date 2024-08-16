@@ -38,7 +38,7 @@ describe PhlexyUI::Card do
         expect { render described_class.new(:foo) }
           .to raise_error(
             ArgumentError,
-            "Condition `foo` is not defined for PhlexyUI::Card"
+            "Modifier `foo` is not defined for PhlexyUI::Card"
           )
       end
     end
