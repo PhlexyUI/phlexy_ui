@@ -28,9 +28,5 @@ module PhlexyUI
       # "lg:tab-disabled"
       disabled: "tab-disabled"
     }.freeze
-
-    ATTRIBUTES_MAP = {
-      checked: true
-    }.freeze
   end
 end
