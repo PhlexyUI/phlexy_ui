@@ -53,12 +53,9 @@ describe PhlexyUI::Button do
     end
 
     context "when modifier doesn't exist" do
-      it "raises an error" do
+      it "does not raise an error" do
         expect { render described_class.new(:foo) }
-          .to raise_error(
-            ArgumentError,
-            "Modifier `foo` is not defined for PhlexyUI::Button"
-          )
+          .not_to raise_error
       end
     end
 

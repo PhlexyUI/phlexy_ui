@@ -11,9 +11,7 @@ module PhlexyUI
     end
 
     def view_template(&)
-      attributes = ATTRIBUTES_MAP.select do |key|
-        base_modifiers.include?(key)
-      end
+      attributes = generate_attributes(base_modifiers, ATTRIBUTES_MAP)
 
       details(**attributes) do
         if @title

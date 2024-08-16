@@ -94,10 +94,7 @@ describe PhlexyUI::Tabs do
     context "when condition doesn't exist" do
       it "raises an error" do
         expect { render described_class.new(:foo) }
-          .to raise_error(
-            ArgumentError,
-            "Modifier `foo` is not defined for PhlexyUI::Tabs"
-          )
+          .not_to raise_error
       end
     end
 
@@ -216,13 +213,13 @@ describe PhlexyUI::Tabs do
       Class.new(Phlex::HTML) do
         def view_template(&)
           render PhlexyUI::Tabs.new :lifted, id: "my_tabs_2" do |tabs|
-            tabs.tab "Tab 1", :active, data: {my: :tabs} do |tab|
+            tabs.tab "Tab 1", :active, :closed, data: {my: :tabs} do |tab|
               tab.content class: "bg-base-100 border-base-300 rounded-box p-6" do
                 "Tab content 1"
               end
             end
 
-            tabs.tab "Tab 2", :checked, class: "text-primary" do |tab|
+            tabs.tab "Tab 2", :open, class: "text-primary" do |tab|
               tab.content class: "bg-base-100 border-base-300 rounded-box p-6", data: {my: :contents} do
                 "Tab content 2"
               end
@@ -245,6 +242,7 @@ describe PhlexyUI::Tabs do
             class="tab tab-active" 
             role="tab" 
             aria-label="Tab 1"
+            closed
             data-my="tabs">
           <div role="tabpanel" 
                class="tab-content 

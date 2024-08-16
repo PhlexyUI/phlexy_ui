@@ -13,17 +13,10 @@ module PhlexyUI
     def view_template(&)
       title, *base_modifiers = @base_modifiers
 
-      @attributes_modifiers = base_modifiers.select do |modifier|
-        ATTRIBUTES_MAP.key?(modifier)
-      end
-
-      base_modifiers = base_modifiers.reject do |modifier|
-        ATTRIBUTES_MAP.key?(modifier)
-      end
-
-      attributes = ATTRIBUTES_MAP.select do |key|
-        @attributes_modifiers.include?(key)
-      end
+      attributes = generate_attributes(
+        base_modifiers,
+        ATTRIBUTES_MAP
+      )
 
       generate_classes!(
         component_html_class: :tab,
@@ -50,7 +43,8 @@ module PhlexyUI
     attr_reader :title
 
     ATTRIBUTES_MAP = {
-      checked: true
+      open: {checked: true},
+      closed: true
     }.freeze
   end
 end

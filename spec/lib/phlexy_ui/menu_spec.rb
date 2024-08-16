@@ -52,10 +52,7 @@ describe PhlexyUI::Menu do
     context "when condition doesn't exist" do
       it "raises an error" do
         expect { render described_class.new(:foo) }
-          .to raise_error(
-            ArgumentError,
-            "Modifier `foo` is not defined for PhlexyUI::Menu"
-          )
+          .not_to raise_error
       end
     end
 

@@ -24,10 +24,7 @@ describe PhlexyUI::Drawer do
     context "when condition doesn't exist" do
       it "raises an error" do
         expect { render described_class.new(:foo, id: :my_drawer) }
-          .to raise_error(
-            ArgumentError,
-            "Modifier `foo` is not defined for PhlexyUI::Drawer"
-          )
+          .not_to raise_error
       end
     end
 

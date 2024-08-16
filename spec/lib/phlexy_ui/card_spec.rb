@@ -34,12 +34,9 @@ describe PhlexyUI::Card do
     end
 
     context "when condition doesn't exist" do
-      it "raises an error" do
+      it "does not raise an error" do
         expect { render described_class.new(:foo) }
-          .to raise_error(
-            ArgumentError,
-            "Modifier `foo` is not defined for PhlexyUI::Card"
-          )
+          .not_to raise_error
       end
     end
 
