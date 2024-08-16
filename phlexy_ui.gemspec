@@ -17,4 +17,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "standard", "~> 1.39.2"
   s.add_development_dependency "rspec", "~> 3.13.0"
+  s.add_development_dependency "debug", "~> 1.9", ">= 1.9.2"
 end
