@@ -32,15 +32,15 @@ module PhlexyUI
       end
     end
 
-    def content(as: :div, **options, &)
+    def content(**options, &)
       generate_classes!(
-        component_html_class: :"dropdown-content menu",
+        component_html_class: :"dropdown-content",
         options:
       ).then do |classes|
         if base_modifiers.include?(:tap_to_close)
-          ul(class: classes, **options, &)
+          render Menu.new(class: classes, **options, &)
         else
-          public_send(as, tabindex: 0, class: classes, **options, &)
+          render Menu.new(tabindex: 0, class: classes, **options, &)
         end
       end
     end

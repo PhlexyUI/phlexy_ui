@@ -68,7 +68,7 @@ describe PhlexyUI::Dropdown do
               "Click"
             end
 
-            dropdown.content(as: :ul) do |content|
+            dropdown.content do |content|
               li do
                 a do
                   "Item 1"
@@ -87,11 +87,11 @@ describe PhlexyUI::Dropdown do
     it "is expected to match the formatted HTML" do
       expected_html = html <<~HTML
         <div class="dropdown dropdown-top">
-          <div class="btn btn-active my-button" 
+          <div class="btn btn-active my-button mb-1" 
                role="button" 
                tabindex="0" 
                data-my="buttons">Click</div>
-          <ul tabindex="0" class="dropdown-content menu">
+          <ul class="menu dropdown-content" tabindex="0">
             <li>
               <a>Item 1</a>
             </li>
@@ -134,7 +134,7 @@ describe PhlexyUI::Dropdown do
           <summary 
             class="btn btn-active my-button mb-1" 
             data-my="buttons">Click</summary>
-          <ul class="dropdown-content menu">
+          <ul class="menu dropdown-content">
             <li>
               <a>Item 1</a>
             </li>
