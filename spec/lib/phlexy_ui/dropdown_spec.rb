@@ -68,7 +68,7 @@ describe PhlexyUI::Dropdown do
               "Click"
             end
 
-            dropdown.content do |content|
+            dropdown.menu do |content|
               li do
                 a do
                   "Item 1"
@@ -112,7 +112,7 @@ describe PhlexyUI::Dropdown do
               "Click"
             end
 
-            dropdown.content do |content|
+            dropdown.menu do |content|
               li do
                 a do
                   "Item 1"

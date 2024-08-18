@@ -32,7 +32,7 @@ module PhlexyUI
       end
     end
 
-    def content(**options, &)
+    def menu(**options, &)
       generate_classes!(
         component_html_class: :"dropdown-content",
         options:
