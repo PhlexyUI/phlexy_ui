@@ -68,8 +68,8 @@ describe PhlexyUI::Dropdown do
               "Click"
             end
 
-            dropdown.menu do |content|
-              li do
+            dropdown.menu do |menu|
+              menu.item do
                 a do
                   "Item 1"
                 end
@@ -112,8 +112,8 @@ describe PhlexyUI::Dropdown do
               "Click"
             end
 
-            dropdown.menu do |content|
-              li do
+            dropdown.menu do |menu|
+              menu.item do
                 a do
                   "Item 1"
                 end
@@ -139,6 +139,103 @@ describe PhlexyUI::Dropdown do
               <a>Item 1</a>
             </li>
           </ul>
+        </details>
+      HTML
+
+      is_expected.to eq(expected_html)
+    end
+  end
+
+  describe "rendering a full dropdown with card content that closes when tapping outside" do
+    let(:component) do
+      Class.new(Phlex::HTML) do
+        def view_template(&)
+          render PhlexyUI::Dropdown.new(:top) do |dropdown|
+            dropdown.button(:active, class: "my-button", data: {my: "buttons"}) do
+              "Click"
+            end
+
+            dropdown.content as: PhlexyUI::Card do |card|
+              card.body do
+                card.title do
+                  "Title"
+                end
+
+                p do
+                  "Body"
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
+    subject(:output) do
+      render component.new
+    end
+
+    it "is expected to match the formatted HTML" do
+      expected_html = html <<~HTML
+        <div class="dropdown dropdown-top">
+          <div class="btn btn-active my-button" 
+               role="button" 
+               tabindex="0" 
+               data-my="buttons">Click</div>
+          <section class="card dropdown-content" tabindex="0">
+            <div class="card-body">
+              <header class="card-title">Title</header>
+              <p>Body</p>
+            </div>
+          </section>
+        </div>
+      HTML
+
+      is_expected.to eq(expected_html)
+    end
+  end
+
+  describe "rendering a full dropdown with card content that closes when tapping the button" do
+    let(:component) do
+      Class.new(Phlex::HTML) do
+        def view_template(&)
+          render PhlexyUI::Dropdown.new(:tap_to_close, :top) do |dropdown|
+            dropdown.button(:active, class: "my-button", data: {my: "buttons"}) do
+              "Click"
+            end
+
+            dropdown.content as: PhlexyUI::Card, class: "bg-base-100" do |card|
+              card.body do
+                card.title do
+                  "Title"
+                end
+
+                p do
+                  "Body"
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
+    subject(:output) do
+      render component.new
+    end
+
+    it "is expected to match the formatted HTML" do
+      expected_html = html <<~HTML
+        <details class="dropdown dropdown-top">
+          <summary 
+            class="btn btn-active my-button" 
+            data-my="buttons">Click</summary>
+          <section class="card dropdown-content bg-base-100">
+            <div class="card-body">
+              <header class="card-title">Title</header>
+              <p>Body</p>
+            </div>
+          </section>
         </details>
       HTML
 

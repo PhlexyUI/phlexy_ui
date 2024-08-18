@@ -30,5 +30,13 @@ module PhlexyUI
     def generate_attributes(base_modifiers, attributes_map)
       AttributeSet.new(base_modifiers, attributes_map).to_h
     end
+
+    def render_as(*, as:, **, &)
+      if as.is_a?(Symbol)
+        render public_send(*, as:, **, &)
+      else
+        render as.new(*, **, &)
+      end
+    end
   end
 end
