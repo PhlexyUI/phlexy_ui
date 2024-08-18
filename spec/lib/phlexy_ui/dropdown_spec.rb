@@ -40,7 +40,7 @@ describe PhlexyUI::Dropdown do
 
     context "when using details as the :as option" do
       subject(:output) do
-        render described_class.new(as: :details) do |dropdown|
+        render described_class.new(:tap_to_close) do |dropdown|
           dropdown.button(:active, class: "my-button", data: {my: "buttons"}) do
             "Click"
           end
@@ -50,7 +50,7 @@ describe PhlexyUI::Dropdown do
       it "renders the dropdown content as a summary tag" do
         expected_html = html <<~HTML
           <details class="dropdown">
-            <summary class="btn btn-active my-button" tabindex="0" data-my="buttons">Click</summary>
+            <summary class="btn btn-active my-button mb-1" data-my="buttons">Click</summary>
           </details>
         HTML
 
@@ -59,7 +59,7 @@ describe PhlexyUI::Dropdown do
     end
   end
 
-  describe "rendering a full dropdown" do
+  describe "rendering a full dropdown that closes when tapping outside" do
     let(:component) do
       Class.new(Phlex::HTML) do
         def view_template(&)
@@ -87,13 +87,59 @@ describe PhlexyUI::Dropdown do
     it "is expected to match the formatted HTML" do
       expected_html = html <<~HTML
         <div class="dropdown dropdown-top">
-          <button class="btn btn-active my-button" tabindex="0" data-my="buttons">Click</button>
-          <ul tabindex="0" class="dropdown-content">
+          <div class="btn btn-active my-button" 
+               role="button" 
+               tabindex="0" 
+               data-my="buttons">Click</div>
+          <ul tabindex="0" class="dropdown-content menu">
             <li>
               <a>Item 1</a>
             </li>
           </ul>
         </div>
+      HTML
+
+      is_expected.to eq(expected_html)
+    end
+  end
+
+  describe "rendering a full dropdown that closes when tapping the button" do
+    let(:component) do
+      Class.new(Phlex::HTML) do
+        def view_template(&)
+          render PhlexyUI::Dropdown.new(:tap_to_close, :top) do |dropdown|
+            dropdown.button(:active, class: "my-button", data: {my: "buttons"}) do
+              "Click"
+            end
+
+            dropdown.content do |content|
+              li do
+                a do
+                  "Item 1"
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
+    subject(:output) do
+      render component.new
+    end
+
+    it "is expected to match the formatted HTML" do
+      expected_html = html <<~HTML
+        <details class="dropdown dropdown-top">
+          <summary 
+            class="btn btn-active my-button mb-1" 
+            data-my="buttons">Click</summary>
+          <ul class="dropdown-content menu">
+            <li>
+              <a>Item 1</a>
+            </li>
+          </ul>
+        </details>
       HTML
 
       is_expected.to eq(expected_html)

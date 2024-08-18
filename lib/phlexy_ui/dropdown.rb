@@ -14,24 +14,34 @@ module PhlexyUI
         base_modifiers:,
         options:
       ).then do |classes|
-        public_send(as, class: classes, **options, &)
+        if base_modifiers.include?(:tap_to_close)
+          details(class: classes, **options, &)
+        else
+          public_send(as, class: classes, **options, &)
+        end
       end
     end
 
-    def button(*, **, &)
-      if as == :details
-        render Button.new(*, tabindex: 0, as: :summary, **, &)
+    def button(*, **options, &)
+      options[:class] = "#{options[:class]} mb-1"
+
+      if base_modifiers.include?(:tap_to_close)
+        render Button.new(*, as: :summary, **options, &)
       else
-        render Button.new(*, tabindex: 0, **, &)
+        render Button.new(*, as: :div, role: :button, tabindex: 0, **options, &)
       end
     end
 
     def content(as: :div, **options, &)
       generate_classes!(
-        component_html_class: :"dropdown-content",
+        component_html_class: :"dropdown-content menu",
         options:
       ).then do |classes|
-        public_send(as, tabindex: 0, class: classes, **options, &)
+        if base_modifiers.include?(:tap_to_close)
+          ul(class: classes, **options, &)
+        else
+          public_send(as, tabindex: 0, class: classes, **options, &)
+        end
       end
     end
 
