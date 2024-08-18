@@ -22,13 +22,11 @@ module PhlexyUI
       end
     end
 
-    def button(*, **options, &)
-      options[:class] = "#{options[:class]} mb-1"
-
+    def button(*, **, &)
       if base_modifiers.include?(:tap_to_close)
-        render Button.new(*, as: :summary, **options, &)
+        render Button.new(*, as: :summary, **, &)
       else
-        render Button.new(*, as: :div, role: :button, tabindex: 0, **options, &)
+        render Button.new(*, as: :div, role: :button, tabindex: 0, **, &)
       end
     end
 
