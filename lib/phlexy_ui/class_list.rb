@@ -14,7 +14,7 @@ module PhlexyUI
       add_component_class(classes)
       add_base_classes(classes)
       add_responsive_classes(classes)
-      add_additional_class(classes)
+      add_user_classes(classes)
       classes
     end
 
@@ -60,7 +60,7 @@ module PhlexyUI
       end
     end
 
-    def add_additional_class(classes)
+    def add_user_classes(classes)
       classes << options.delete(:class) if options[:class]
     end
 
