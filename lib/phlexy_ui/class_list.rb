@@ -65,11 +65,19 @@ module PhlexyUI
     end
 
     def with_config_prefix(string)
-      "#{PhlexyUI.configuration.prefix}#{string}"
+      string.to_s.split.map do |word|
+        "#{PhlexyUI.configuration.prefix}#{word}"
+      end.join(" ")
     end
 
     def with_responsive_prefix(string, responsive_prefix = nil)
-      responsive_prefix ? "#{responsive_prefix}:#{string}" : string
+      string.split.map do |word|
+        if responsive_prefix
+          "#{responsive_prefix}:#{word}"
+        else
+          word
+        end
+      end.join(" ")
     end
   end
 end

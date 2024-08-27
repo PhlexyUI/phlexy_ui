@@ -11,14 +11,26 @@ describe PhlexyUI::Card do
     is_expected.to eq(expected_html)
   end
 
-  describe "conditions" do
+  describe "modifiers" do
     {
       # Modifiers
       image_full: "image-full",
       bordered: "card-bordered",
       normal: "card-normal",
       compact: "card-compact",
-      side: "card-side"
+      side: "card-side",
+      glass: "glass",
+      primary: "bg-primary text-primary-content",
+      secondary: "bg-secondary text-secondary-content",
+      accent: "bg-accent text-accent-content",
+      neutral: "bg-neutral text-neutral-content",
+      base_100: "bg-base-100 text-base-content",
+      base_200: "bg-base-200 text-base-content",
+      base_300: "bg-base-300 text-base-content",
+      info: "bg-info text-info-content",
+      success: "bg-success text-success-content",
+      warning: "bg-warning text-warning-content",
+      error: "bg-error text-error-content"
     }.each do |condition, css|
       context "when given :#{condition} condition" do
         subject(:output) { render described_class.new(condition) }
@@ -99,12 +111,16 @@ describe PhlexyUI::Card do
     %i[sm md lg].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
         subject(:output) do
-          render described_class.new(:compact, viewport => :bordered)
+          render described_class.new(:compact, viewport => :primary)
         end
 
         it "renders it separately with a responsive prefix" do
           expected_html = html <<~HTML
-            <section class="card card-compact #{viewport}:card-bordered">
+            <section class="
+              card 
+              card-compact 
+              #{viewport}:bg-primary 
+              #{viewport}:text-primary-content">
             </section>
           HTML
 
@@ -114,7 +130,7 @@ describe PhlexyUI::Card do
 
       context "when given multiple responsive options as an array" do
         subject(:output) do
-          render described_class.new(:compact, viewport => [:normal, :bordered])
+          render described_class.new(:compact, viewport => [:normal, :primary])
         end
 
         it "renders it separately with a responsive prefix" do
@@ -123,7 +139,8 @@ describe PhlexyUI::Card do
               card 
               card-compact 
               #{viewport}:card-normal 
-              #{viewport}:card-bordered">
+              #{viewport}:bg-primary
+              #{viewport}:text-primary-content">
             </section>
           HTML
 
@@ -147,16 +164,17 @@ describe PhlexyUI::Card do
         end
 
         subject(:output) do
-          render described_class.new(:compact, viewport => [:normal, :bordered])
+          render described_class.new(:compact, viewport => [:normal, :primary])
         end
 
         it "renders it separately with a responsive prefix" do
           expected_html = html <<~HTML
             <section class="
               foo-card 
-              foo-card-compact 
-              #{viewport}:foo-card-normal 
-              #{viewport}:foo-card-bordered">
+              foo-card-compact
+              #{viewport}:foo-card-normal
+              #{viewport}:foo-bg-primary
+              #{viewport}:foo-text-primary-content">
             </section>
           HTML
 
