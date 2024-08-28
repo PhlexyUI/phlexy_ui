@@ -59,6 +59,40 @@ describe PhlexyUI::Dropdown do
     end
   end
 
+  describe "passing modifiers to the menu" do
+    let(:component) do
+      Class.new(Phlex::HTML) do
+        def view_template(&)
+          render PhlexyUI::Dropdown.new do |dropdown|
+            dropdown.menu(:vertical, :xs) do |menu|
+              menu.item do
+                a do
+                  "Item 1"
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
+    subject(:output) { render component.new }
+
+    it "renders the menu with the given modifiers" do
+      expected_html = html <<~HTML
+        <div class="dropdown">
+          <ul class="menu menu-vertical menu-xs dropdown-content" tabindex="0">
+            <li>
+              <a>Item 1</a>
+            </li>
+          </ul>
+        </div>
+      HTML
+
+      is_expected.to eq(expected_html)
+    end
+  end
+
   describe "rendering a full dropdown that closes when tapping outside" do
     let(:component) do
       Class.new(Phlex::HTML) do
