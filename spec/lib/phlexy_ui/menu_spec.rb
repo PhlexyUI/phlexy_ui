@@ -10,7 +10,14 @@ describe PhlexyUI::Menu do
       md: "menu-md",
       lg: "menu-lg",
       vertical: "menu-vertical",
-      horizontal: "menu-horizontal"
+      horizontal: "menu-horizontal",
+      base_100: "bg-base-100 text-base-content",
+      base_200: "bg-base-200 text-base-content",
+      base_300: "bg-base-300 text-base-content",
+      info: "bg-info text-info-content",
+      success: "bg-success text-success-content",
+      warning: "bg-warning text-warning-content",
+      error: "bg-error text-error-content"
     }.each do |condition, class_name|
       context "when given :#{condition} condition" do
         subject(:output) { render described_class.new(condition) }
