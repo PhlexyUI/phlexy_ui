@@ -20,9 +20,7 @@ module PhlexyUI
       if @items.any?
         ul do
           @items.each do |item|
-            li do
-              render item
-            end
+            render item
           end
         end
       end
@@ -32,12 +30,8 @@ module PhlexyUI
       @title = block
     end
 
-    def item(&block)
-      @items << block
-    end
-
-    def submenu(*, **, &)
-      @items << self.class.new(*, **, &)
+    def item(*, **, &)
+      @items << MenuItem.new(*, **, &)
     end
   end
 end

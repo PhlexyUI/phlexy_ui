@@ -22,21 +22,19 @@ module PhlexyUI
       end
     end
 
-    def item(*base_modifiers, **options, &)
-      generate_classes!(
-        modifiers_map: MENU_ITEM_MODIFIERS_MAP,
-        base_modifiers:,
-        options:
-      ).then do |classes|
-        li(class: classes, &)
-      end
+    def item(*, **, &)
+      render MenuItem.new(*, **, &)
     end
 
     def submenu(*base_modifiers, **, &)
       if base_modifiers.include?(:collapsible)
-        render CollapsibleSubMenu.new(*base_modifiers, **, &)
+        li do
+          render CollapsibleSubMenu.new(*base_modifiers, **, &)
+        end
       else
-        render SubMenu.new(*base_modifiers, **, &)
+        li do
+          render SubMenu.new(*base_modifiers, **, &)
+        end
       end
     end
 
@@ -111,21 +109,6 @@ module PhlexyUI
       # "md:bg-error md:text-error-content"
       # "lg:bg-error lg:text-error-content"
       error: "bg-error text-error-content"
-    }.freeze
-
-    MENU_ITEM_MODIFIERS_MAP = {
-      # "sm:disabled"
-      # "md:disabled"
-      # "lg:disabled"
-      disabled: "disabled",
-      # "sm:active"
-      # "md:active"
-      # "lg:active"
-      active: "active",
-      # "sm:focus"
-      # "md:focus"
-      # "lg:focus"
-      focus: "focus"
     }.freeze
   end
 end

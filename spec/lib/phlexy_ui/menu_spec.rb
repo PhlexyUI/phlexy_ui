@@ -236,64 +236,70 @@ describe PhlexyUI::Menu do
               end
             end
 
-            menu.item do
-              menu.submenu :collapsible, :open do |submenu_1|
-                submenu_1.title do
+            menu.item do |item|
+              item.submenu :collapsible, :open do |submenu|
+                submenu.title do
                   "Parent 1"
                 end
 
-                submenu_1.item do
+                submenu.item do |submenu_item|
                   a do
                     "Child 1"
                   end
                 end
 
-                submenu_1.submenu do |submenu_2|
-                  submenu_2.title do
-                    "Parent 2"
-                  end
+                submenu.item do |submenu_item|
+                  submenu_item.submenu :collapsible do |submenu_2|
+                    submenu_2.title do
+                      "Parent 2"
+                    end
 
-                  submenu_2.item do
-                    a do
-                      "Child 2"
+                    submenu_2.item do
+                      a do
+                        "Child 2"
+                      end
                     end
                   end
                 end
 
-                menu.submenu do |submenu_3|
-                  submenu_3.title do
-                    "Parent 3"
-                  end
+                submenu.item do |submenu_item|
+                  submenu_item.submenu do |submenu_2|
+                    submenu_2.title do
+                      "Parent 3"
+                    end
 
-                  submenu_3.item do
-                    a do
-                      "Child 3"
+                    submenu_2.item do
+                      a do
+                        "Child 3"
+                      end
                     end
                   end
                 end
               end
             end
 
-            menu.item do
-              menu.submenu do |submenu_2|
-                submenu_2.title do
+            menu.item do |item|
+              item.submenu do |submenu|
+                submenu.title do
                   "Parent 1"
                 end
 
-                submenu_2.item do
+                submenu.item do
                   a do
                     "Child 1"
                   end
                 end
 
-                submenu_2.submenu do |submenu_2|
-                  submenu_2.title do
-                    "Parent 2"
-                  end
+                submenu.item do |item|
+                  item.submenu do |submenu_2|
+                    submenu_2.title do
+                      "Parent 2"
+                    end
 
-                  submenu_2.item do
-                    a do
-                      "Child 2"
+                    submenu_2.item do
+                      a do
+                        "Child 2"
+                      end
                     end
                   end
                 end
@@ -326,6 +332,12 @@ describe PhlexyUI::Menu do
                     </ul>
                   </details>
                 </li>
+                <li>
+                  <div>Parent 3</div>
+                  <ul>
+                    <li><a>Child 3</a></li>
+                  </ul>
+                </li>
               </ul>
             </details>
           </li>
@@ -339,6 +351,168 @@ describe PhlexyUI::Menu do
                   <li><a>Child 2</a></li>
                 </ul>
               </li>
+            </ul>
+          </li>
+        </ul>
+        
+      HTML
+
+      is_expected.to eq(expected_html)
+    end
+  end
+
+  describe "rendering a components sidebar" do
+    let(:component) do
+      Class.new(Phlex::HTML) do
+        def view_template(&)
+          render PhlexyUI::Menu do |menu|
+            menu.item do |item|
+              item.submenu :collapsible, :open do |submenu|
+                submenu.title { "Docs" }
+
+                submenu.item do
+                  a href: "/docs/installation" do
+                    "Installation"
+                  end
+                end
+              end
+            end
+
+            menu.item do |item|
+              item.submenu :collapsible, :open do |submenu|
+                submenu.title { "Components" }
+
+                [
+                  {
+                    name: "Actions",
+                    components: [
+                      "Button",
+                      "Dropdown"
+                    ]
+                  },
+                  {
+                    name: "Data display",
+                    components: [
+                      "Badge",
+                      "Card"
+                    ]
+                  }
+                ].each do |category|
+                  submenu.item do |item|
+                    item.title class: "px-1.5" do
+                      category[:name]
+                    end
+
+                    item.submenu do |submenu|
+                      category[:components].each do |component|
+                        submenu.item do
+                          a href: "/components/#{component.downcase}" do
+                            component
+                          end
+                        end
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
+    subject(:output) do
+      render component.new
+    end
+
+    it "is expected to match the formatted HTML" do
+      expected_html = html <<~HTML
+        <ul class="menu">
+          <li>
+            <details open>
+              <summary>Docs</summary>
+              <ul>
+                <li><a href="/docs/installation">Installation</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details open>
+              <summary>Components</summary>
+              <ul>
+                <li>
+                  <h2 class="menu-title px-1.5">Actions</h2>
+                  <ul>
+                    <li><a href="/components/button">Button</a></li>
+                    <li><a href="/components/dropdown">Dropdown</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <h2 class="menu-title px-1.5">Data display</h2>
+                  <ul>
+                    <li><a href="/components/badge">Badge</a></li>
+                    <li><a href="/components/card">Card</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+        
+      HTML
+
+      is_expected.to eq(expected_html)
+    end
+  end
+
+  describe "rendering with title as parent" do
+    let(:component) do
+      Class.new(Phlex::HTML) do
+        def view_template(&)
+          render PhlexyUI::Menu.new :base_200, class: "rounded-box w-56" do |menu|
+            menu.item do |item|
+              item.title do
+                "Title"
+              end
+
+              item.submenu do |submenu|
+                submenu.item do
+                  a do
+                    "Item 1"
+                  end
+                end
+
+                submenu.item do
+                  a do
+                    "Item 2"
+                  end
+                end
+
+                submenu.item do
+                  a do
+                    "Item 3"
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
+    subject(:output) do
+      render component.new
+    end
+
+    it "is expected to match the formatted HTML" do
+      expected_html = html <<~HTML
+        <ul class="menu bg-base-200 text-base-content rounded-box w-56">
+          <li>
+            <h2 class="menu-title">Title</h2>
+            <ul>
+              <li><a>Item 1</a></li>
+              <li><a>Item 2</a></li>
+              <li><a>Item 3</a></li>
             </ul>
           </li>
         </ul>
