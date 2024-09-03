@@ -12,9 +12,9 @@ module PhlexyUI
     def to_a
       classes = []
       add_component_class(classes)
-      add_base_classes(classes)
-      add_responsive_classes(classes)
-      add_user_classes(classes)
+      add_selected_modifiers_classes(classes)
+      add_responsive_modifiers_classes(classes)
+      add_class_option_classes(classes)
       classes
     end
 
@@ -22,7 +22,7 @@ module PhlexyUI
 
     attr_reader :component_html_class, :base_modifiers, :options, :modifiers_map
 
-    def classes_modifiers
+    def selected_base_modifiers_classes
       base_modifiers.select { |modifier| modifiers_map.key?(modifier) }
     end
 
@@ -32,8 +32,12 @@ module PhlexyUI
       classes << with_config_prefix(component_html_class)
     end
 
-    def add_base_classes(classes)
-      classes.concat(html_classes_for_modifiers(classes_modifiers))
+    def add_selected_modifiers_classes(classes)
+      classes.concat(
+        html_classes_for_modifiers(
+          selected_base_modifiers_classes
+        )
+      )
     end
 
     def html_classes_for_modifiers(modifiers, responsive_prefix: nil)
@@ -47,7 +51,7 @@ module PhlexyUI
       end
     end
 
-    def add_responsive_classes(classes)
+    def add_responsive_modifiers_classes(classes)
       RESPONSIVE_PREFIXES.each do |responsive_prefix|
         if (values = options.delete(responsive_prefix))
           classes.concat(
@@ -60,7 +64,7 @@ module PhlexyUI
       end
     end
 
-    def add_user_classes(classes)
+    def add_class_option_classes(classes)
       classes << options.delete(:class) if options[:class]
     end
 
