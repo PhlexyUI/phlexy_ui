@@ -18,6 +18,7 @@ module PhlexyUI
       modifiers_map: {}
     )
       ClassList.new(
+        component: self,
         component_html_class:,
         base_modifiers:,
         options:,

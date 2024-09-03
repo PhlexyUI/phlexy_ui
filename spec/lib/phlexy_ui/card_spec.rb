@@ -107,6 +107,81 @@ describe PhlexyUI::Card do
     end
   end
 
+  describe "custom modifiers" do
+    context "when there's a custom modifier for the component" do
+      around do |example|
+        PhlexyUI.configure do |config|
+          config.modifiers.add(
+            :my_modifier,
+            component: PhlexyUI::Card,
+            classes: "w-96 shadow-xl"
+          )
+        end
+
+        example.run
+
+        PhlexyUI.configure do |config|
+          config.modifiers.remove(:my_modifier, component: PhlexyUI::Card)
+        end
+      end
+
+      subject(:output) do
+        render described_class.new(:my_modifier)
+      end
+
+      it "renders it correctly" do
+        expected_html = html <<~HTML
+          <section class="card w-96 shadow-xl"></section>
+        HTML
+
+        expect(output).to eq(expected_html)
+      end
+    end
+
+    context "when there's a custom modifier without a specific component" do
+      around do |example|
+        PhlexyUI.configure do |config|
+          config.modifiers.add(
+            :my_modifier,
+            classes: "w-96 shadow-xl"
+          )
+        end
+
+        example.run
+
+        PhlexyUI.configure do |config|
+          config.modifiers.remove(:my_modifier)
+        end
+      end
+
+      subject(:output) do
+        render described_class.new(:my_modifier)
+      end
+
+      it "renders it correctly" do
+        expected_html = html <<~HTML
+          <section class="card w-96 shadow-xl"></section>
+        HTML
+
+        expect(output).to eq(expected_html)
+      end
+    end
+
+    context "when there's no custom modifier" do
+      subject(:output) do
+        render described_class.new(:my_modifier)
+      end
+
+      it "does not render it" do
+        expected_html = html <<~HTML
+          <section class="card"></section>
+        HTML
+
+        expect(output).to eq(expected_html)
+      end
+    end
+  end
+
   describe "responsiveness" do
     %i[sm md lg].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
@@ -175,6 +250,51 @@ describe PhlexyUI::Card do
               #{viewport}:foo-card-normal
               #{viewport}:foo-bg-primary
               #{viewport}:foo-text-primary-content">
+            </section>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+
+      context "when there are custom modifiers" do
+        around do |example|
+          PhlexyUI.configure do |config|
+            config.modifiers.add(
+              :my_modifier,
+              component: PhlexyUI::Card,
+              classes: "w-96 shadow-xl"
+            )
+
+            config.modifiers.add(
+              :my_other_modifier,
+              classes: "p-4 rounded-box"
+            )
+          end
+
+          example.run
+
+          PhlexyUI.configure do |config|
+            config.modifiers.remove(:my_modifier, component: PhlexyUI::Card)
+            config.modifiers.remove(:my_other_modifier)
+          end
+        end
+
+        subject(:output) do
+          render described_class.new(
+            :my_modifier,
+            viewport => :my_other_modifier
+          )
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <section class="
+              card
+              w-96
+              shadow-xl
+              #{viewport}:rounded-box
+              #{viewport}:p-4>
             </section>
           HTML
 

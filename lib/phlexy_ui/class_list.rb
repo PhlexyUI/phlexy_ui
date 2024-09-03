@@ -2,7 +2,13 @@ module PhlexyUI
   class ClassList
     RESPONSIVE_PREFIXES = %i[sm md lg].freeze
 
-    def initialize(component_html_class: nil, base_modifiers: [], options: {}, modifiers_map: {})
+    def initialize(
+      component:,
+      component_html_class: nil,
+      base_modifiers: [],
+      options: {},
+      modifiers_map: {}
+    )
       @component_html_class = component_html_class
       @base_modifiers = base_modifiers
       @options = options
@@ -22,8 +28,15 @@ module PhlexyUI
 
     attr_reader :component_html_class, :base_modifiers, :options, :modifiers_map
 
-    def selected_base_modifiers_classes
+    def selected_base_modifiers
       base_modifiers.select { |modifier| modifiers_map.key?(modifier) }
+    end
+
+    def selected_custom_modifiers
+      base_modifiers.select do |modifier|
+        PhlexyUI.configuration.modifiers.key?(modifier, component:) ||
+          PhlexyUI.configuration.modifiers.key?(modifier)
+      end
     end
 
     def add_component_class(classes)
@@ -35,7 +48,13 @@ module PhlexyUI
     def add_selected_modifiers_classes(classes)
       classes.concat(
         html_classes_for_modifiers(
-          selected_base_modifiers_classes
+          selected_base_modifiers
+        )
+      )
+
+      classes.concat(
+        html_classes_for_modifiers(
+          selected_custom_modifiers
         )
       )
     end
