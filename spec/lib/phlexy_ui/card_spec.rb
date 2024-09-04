@@ -293,8 +293,8 @@ describe PhlexyUI::Card do
               card
               w-96
               shadow-xl
-              #{viewport}:rounded-box
-              #{viewport}:p-4>
+              #{viewport}:p-4
+              #{viewport}:rounded-box">
             </section>
           HTML
 

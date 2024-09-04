@@ -10,7 +10,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :card,
-        modifiers_map: CARD_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -45,9 +45,7 @@ module PhlexyUI
       end
     end
 
-    private
-
-    CARD_MODIFIERS_MAP = {
+    register_modifiers(
       # "sm:image-full"
       # "md:image-full"
       # "lg:image-full"
@@ -116,6 +114,6 @@ module PhlexyUI
       # "md:bg-error md:text-error-content"
       # "lg:bg-error lg:text-error-content"
       error: "bg-error text-error-content"
-    }.freeze
+    )
   end
 end

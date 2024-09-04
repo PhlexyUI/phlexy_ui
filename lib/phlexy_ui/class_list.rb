@@ -32,13 +32,6 @@ module PhlexyUI
       base_modifiers.select { |modifier| modifiers_map.key?(modifier) }
     end
 
-    def selected_custom_modifiers
-      base_modifiers.select do |modifier|
-        PhlexyUI.configuration.modifiers.key?(modifier, component:) ||
-          PhlexyUI.configuration.modifiers.key?(modifier)
-      end
-    end
-
     def add_component_class(classes)
       return unless component_html_class
 
@@ -49,12 +42,6 @@ module PhlexyUI
       classes.concat(
         html_classes_for_modifiers(
           selected_base_modifiers
-        )
-      )
-
-      classes.concat(
-        html_classes_for_modifiers(
-          selected_custom_modifiers
         )
       )
     end

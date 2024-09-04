@@ -7,9 +7,28 @@ module PhlexyUI
       @options = options
     end
 
+    class << self
+      attr_reader :modifiers
+
+      private
+
+      def register_modifiers(modifiers)
+        @modifiers ||= {}
+        @modifiers.merge!(modifiers)
+      end
+    end
+
     private
 
     attr_reader :base_modifiers, :options, :as, :id
+
+    def modifiers
+      {
+        **self.class.modifiers,
+        **PhlexyUI.configuration.modifiers.for(component: self.class),
+        **PhlexyUI.configuration.modifiers.for(component: nil)
+      }
+    end
 
     def generate_classes!(
       component_html_class: nil,
