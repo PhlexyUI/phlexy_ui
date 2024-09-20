@@ -20,7 +20,7 @@ module PhlexyUI
 
       generate_classes!(
         component_html_class: :tab,
-        modifiers_map: Tab::TAB_MODIFIERS_CLASSES,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -46,5 +46,16 @@ module PhlexyUI
       open: {checked: true},
       closed: true
     }.freeze
+
+    register_modifiers(
+      # "sm:tab-active"
+      # "md:tab-active"
+      # "lg:tab-active"
+      active: "tab-active",
+      # "sm:tab-disabled"
+      # "md:tab-disabled"
+      # "lg:tab-disabled"
+      disabled: "tab-disabled"
+    )
   end
 end

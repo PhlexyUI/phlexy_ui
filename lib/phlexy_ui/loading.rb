@@ -10,7 +10,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :loading,
-        modifiers_map: LOADING_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -20,7 +20,7 @@ module PhlexyUI
 
     private
 
-    LOADING_MODIFIERS_MAP = {
+    register_modifiers(
       # "sm:loading-spinner"
       # "md:loading-spinner"
       # "lg:loading-spinner"
@@ -93,6 +93,6 @@ module PhlexyUI
       # "md:text-error"
       # "lg:text-error"
       error: "text-error"
-    }.freeze
+    ).freeze
   end
 end

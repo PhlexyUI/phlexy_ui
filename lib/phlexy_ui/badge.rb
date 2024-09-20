@@ -10,7 +10,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :badge,
-        modifiers_map: BADGE_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -20,7 +20,7 @@ module PhlexyUI
 
     private
 
-    BADGE_MODIFIERS_MAP = {
+    register_modifiers(
       # "sm:badge-neutral"
       # "md:badge-neutral"
       # "lg:badge-neutral"
@@ -77,6 +77,6 @@ module PhlexyUI
       # "md:badge-xs"
       # "lg:badge-xs"
       xs: "badge-xs"
-    }.freeze
+    )
   end
 end

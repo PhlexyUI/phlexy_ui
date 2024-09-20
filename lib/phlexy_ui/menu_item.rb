@@ -5,7 +5,7 @@ module PhlexyUI
   class MenuItem < Base
     def view_template(&)
       generate_classes!(
-        modifiers_map: MENU_ITEM_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -32,7 +32,7 @@ module PhlexyUI
 
     private
 
-    MENU_ITEM_MODIFIERS_MAP = {
+    register_modifiers(
       # "sm:disabled"
       # "md:disabled"
       # "lg:disabled"
@@ -45,6 +45,6 @@ module PhlexyUI
       # "md:focus"
       # "lg:focus"
       focus: "focus"
-    }.freeze
+    )
   end
 end

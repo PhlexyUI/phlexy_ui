@@ -11,7 +11,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :tabs,
-        modifiers_map: TABS_MODIFIERS_CLASSES,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -25,7 +25,7 @@ module PhlexyUI
 
     private
 
-    TABS_MODIFIERS_CLASSES = {
+    register_modifiers(
       # "sm:tabs-boxed"
       # "md:tabs-boxed"
       # "lg:tabs-boxed"
@@ -54,6 +54,6 @@ module PhlexyUI
       # "md:tabs-lg"
       # "lg:tabs-lg"
       lg: "tabs-lg"
-    }.freeze
+    )
   end
 end

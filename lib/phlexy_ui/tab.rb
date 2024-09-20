@@ -39,18 +39,5 @@ module PhlexyUI
         end
       end
     end
-
-    private
-
-    TAB_MODIFIERS_CLASSES = {
-      # "sm:tab-active"
-      # "md:tab-active"
-      # "lg:tab-active"
-      active: "tab-active",
-      # "sm:tab-disabled"
-      # "md:tab-disabled"
-      # "lg:tab-disabled"
-      disabled: "tab-disabled"
-    }.freeze
   end
 end

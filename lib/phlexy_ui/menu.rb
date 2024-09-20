@@ -5,7 +5,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :menu,
-        modifiers_map: MENU_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -40,7 +40,7 @@ module PhlexyUI
 
     private
 
-    MENU_MODIFIERS_MAP = {
+    register_modifiers(
       # "sm:menu-xs"
       # "md:menu-xs"
       # "lg:menu-xs"
@@ -109,6 +109,6 @@ module PhlexyUI
       # "md:bg-error md:text-error-content"
       # "lg:bg-error lg:text-error-content"
       error: "bg-error text-error-content"
-    }.freeze
+    )
   end
 end

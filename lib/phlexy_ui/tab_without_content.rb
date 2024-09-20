@@ -6,7 +6,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :tab,
-        modifiers_map: Tab::TAB_MODIFIERS_CLASSES,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -18,7 +18,7 @@ module PhlexyUI
 
     attr_reader :title
 
-    TAB_MODIFIERS_CLASSES = {
+    register_modifiers(
       # "sm:tab-active"
       # "md:tab-active"
       # "lg:tab-active"
@@ -27,6 +27,6 @@ module PhlexyUI
       # "md:tab-disabled"
       # "lg:tab-disabled"
       disabled: "tab-disabled"
-    }.freeze
+    )
   end
 end

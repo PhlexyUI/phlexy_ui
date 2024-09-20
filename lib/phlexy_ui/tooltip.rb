@@ -11,7 +11,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :tooltip,
-        modifiers_map: TOOLTIP_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -23,7 +23,7 @@ module PhlexyUI
 
     attr_reader :tip
 
-    TOOLTIP_MODIFIERS_MAP = {
+    register_modifiers(
       # "sm:tooltip-open"
       # "md:tooltip-open"
       # "lg:tooltip-open"
@@ -72,6 +72,6 @@ module PhlexyUI
       # "md:tooltip-error"
       # "lg:tooltip-error"
       error: "tooltip-error"
-    }.freeze
+    )
   end
 end

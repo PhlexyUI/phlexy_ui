@@ -4,7 +4,7 @@ module PhlexyUI
   class Link < Base
     def view_template(&)
       generate_classes!(
-        modifiers_map: LINK_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -16,7 +16,7 @@ module PhlexyUI
 
     attr_reader :link_to_name
 
-    LINK_MODIFIERS_MAP = {
+    register_modifiers(
       # "sm:link"
       # "md:link"
       # "lg:link"
@@ -85,6 +85,6 @@ module PhlexyUI
       # "md:link-error"
       # "lg:link-error"
       error: "link-error"
-    }.freeze
+    ).freeze
   end
 end

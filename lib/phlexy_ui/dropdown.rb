@@ -10,7 +10,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :dropdown,
-        modifiers_map: DROPDOWN_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -58,7 +58,7 @@ module PhlexyUI
 
     private
 
-    DROPDOWN_MODIFIERS_MAP = {
+    register_modifiers(
         # "sm:dropdown-end"
         # "md:dropdown-end"
         # "lg:dropdown-end"
@@ -87,6 +87,6 @@ module PhlexyUI
       # "md:dropdown-open"
       # "lg:dropdown-open"
       open: "dropdown-open"
-    }.freeze
+    )
   end
 end

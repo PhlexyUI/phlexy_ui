@@ -11,7 +11,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :drawer,
-        modifiers_map: DRAWER_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -61,15 +61,15 @@ module PhlexyUI
 
     private
 
-    DRAWER_MODIFIERS_MAP = {
-        # "sm:drawer-end",
-        # "md:drawer-end",
-        # "lg:drawer-end",
+    register_modifiers(
+        # "sm:drawer-end"
+        # "md:drawer-end"
+        # "lg:drawer-end"
       end: "drawer-end",
-      # "sm:drawer-open",
-      # "md:drawer-open",
-      # "lg:drawer-open",
+      # "sm:drawer-open"
+      # "md:drawer-open"
+      # "lg:drawer-open"
       open: "drawer-open"
-    }.freeze
+    )
   end
 end

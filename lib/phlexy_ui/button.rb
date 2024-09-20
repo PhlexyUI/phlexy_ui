@@ -10,7 +10,7 @@ module PhlexyUI
     def view_template(&)
       generate_classes!(
         component_html_class: :btn,
-        modifiers_map: BUTTON_MODIFIERS_MAP,
+        modifiers_map: modifiers,
         base_modifiers:,
         options:
       ).then do |classes|
@@ -20,7 +20,7 @@ module PhlexyUI
 
     private
 
-    BUTTON_MODIFIERS_MAP = {
+    register_modifiers(
       # Modifiers
       # "sm:no-animation"
       # "md:no-animation"
@@ -115,6 +115,6 @@ module PhlexyUI
       # "md:btn-error"
       # "lg:btn-error"
       error: "btn-error"
-    }.freeze
+    ).freeze
   end
 end
