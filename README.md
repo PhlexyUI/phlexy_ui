@@ -1,3 +1,8 @@
+<picture>
+  <source srcset="https://github.com/user-attachments/assets/2c4d7fdb-abe7-4f71-a6d0-ef4d41b5625a" media="(prefers-color-scheme: dark)">
+  <img src="https://github.com/user-attachments/assets/9afa9755-4aab-412a-9dc9-5eb2f76c12d6" width="350" alt="PhlexUI logo"><br>
+</picture>
+
 A Ruby UI component library for DaisyUI using Phlex ✨
 
 # ⚙️ Installation
