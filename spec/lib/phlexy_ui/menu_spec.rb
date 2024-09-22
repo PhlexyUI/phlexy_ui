@@ -122,7 +122,7 @@ describe PhlexyUI::Menu do
     %i[sm md lg].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
         subject(:output) do
-          render described_class.new(:xs, viewport => :vertical)
+          render described_class.new(:xs, responsive: {viewport => :vertical})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -137,7 +137,7 @@ describe PhlexyUI::Menu do
 
       context "when given multiple responsive options as an array" do
         subject(:output) do
-          render described_class.new(:xs, viewport => [:horizontal, :vertical])
+          render described_class.new(:xs, responsive: {viewport => [:horizontal, :vertical]})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -170,7 +170,7 @@ describe PhlexyUI::Menu do
         end
 
         subject(:output) do
-          render described_class.new(:xs, viewport => [:horizontal, :vertical])
+          render described_class.new(:xs, responsive: {viewport => [:horizontal, :vertical]})
         end
 
         it "renders it separately with a responsive prefix" do

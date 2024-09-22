@@ -87,7 +87,7 @@ describe PhlexyUI::Drawer do
     %i[sm md lg].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
         subject(:output) do
-          render described_class.new(:open, viewport => :end, :id => :my_drawer)
+          render described_class.new(:open, responsive: {viewport => :end}, id: :my_drawer)
         end
 
         it "renders it separately with a responsive prefix" do
@@ -102,7 +102,7 @@ describe PhlexyUI::Drawer do
 
       context "when given multiple responsive options as an array" do
         subject(:output) do
-          render described_class.new(:open, viewport => [:open, :end], :id => :my_drawer)
+          render described_class.new(:open, responsive: {viewport => [:open, :end]}, id: :my_drawer)
         end
 
         it "renders it separately with a responsive prefix" do
@@ -135,7 +135,7 @@ describe PhlexyUI::Drawer do
         end
 
         subject(:output) do
-          render described_class.new(:open, viewport => [:open, :end], :id => :my_drawer)
+          render described_class.new(:open, responsive: {viewport => [:open, :end]}, id: :my_drawer)
         end
 
         it "renders it separately with a responsive prefix" do

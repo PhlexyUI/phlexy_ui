@@ -118,7 +118,7 @@ describe PhlexyUI::Button do
     %i[sm md lg].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
         subject(:output) do
-          render described_class.new(:neutral, viewport => :primary)
+          render described_class.new(:neutral, responsive: {viewport => :primary})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -132,7 +132,7 @@ describe PhlexyUI::Button do
 
       context "when given multiple responsive options as an array" do
         subject(:output) do
-          render described_class.new(:neutral, viewport => [:primary, :active])
+          render described_class.new(:neutral, responsive: {viewport => [:primary, :active]})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -165,7 +165,7 @@ describe PhlexyUI::Button do
         end
 
         subject(:output) do
-          render described_class.new(:neutral, viewport => [:primary, :active])
+          render described_class.new(:neutral, responsive: {viewport => [:primary, :active]})
         end
 
         it "renders it separately with a responsive prefix" do

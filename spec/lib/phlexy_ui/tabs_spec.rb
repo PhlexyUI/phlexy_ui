@@ -115,7 +115,7 @@ describe PhlexyUI::Tabs do
     %i[sm md lg].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
         subject(:output) do
-          render described_class.new(:boxed, viewport => :bordered)
+          render described_class.new(:boxed, responsive: {viewport => :bordered})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -130,7 +130,7 @@ describe PhlexyUI::Tabs do
 
       context "when given multiple responsive options as an array" do
         subject(:output) do
-          render described_class.new(:boxed, viewport => [:boxed, :bordered])
+          render described_class.new(:boxed, responsive: {viewport => [:boxed, :bordered]})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -163,7 +163,7 @@ describe PhlexyUI::Tabs do
         end
 
         subject(:output) do
-          render described_class.new(:boxed, viewport => [:boxed, :bordered])
+          render described_class.new(:boxed, responsive: {viewport => [:boxed, :bordered]})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -212,7 +212,7 @@ describe PhlexyUI::Tabs do
     let(:component) do
       Class.new(Phlex::HTML) do
         def view_template(&)
-          render PhlexyUI::Tabs.new :lifted, id: "my_tabs_2" do |tabs|
+          render PhlexyUI::Tabs.new :lifted, boxed: false, id: "my_tabs_2" do |tabs|
             tabs.tab "Tab 1", :active, :closed, data: {my: :tabs} do |tab|
               tab.content class: "bg-base-100 border-base-300 rounded-box p-6" do
                 "Tab content 1"

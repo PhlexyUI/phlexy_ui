@@ -4,18 +4,18 @@ describe PhlexyUI::Tooltip do
   subject(:output) { render described_class.new }
 
   describe "rendering via Kit" do
-      subject(:output) do
-        Tooltip tip: "A tooltip"
-      end
-  
-      it "renders it correctly" do
-        expected_html = html <<~HTML
-          <div class="tooltip" data-tip="A tooltip"></div>
-        HTML
-  
-        expect(output).to eq(expected_html)
-      end
+    subject(:output) do
+      Tooltip tip: "A tooltip"
     end
+
+    it "renders it correctly" do
+      expected_html = html <<~HTML
+        <div class="tooltip" data-tip="A tooltip"></div>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
 
   describe "passing :as option" do
     subject(:output) { render described_class.new(as: :a, tip: "A tooltip") }

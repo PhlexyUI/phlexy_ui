@@ -186,7 +186,7 @@ describe PhlexyUI::Card do
     %i[sm md lg].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
         subject(:output) do
-          render described_class.new(:compact, viewport => :primary)
+          render described_class.new(:compact, responsive: {viewport => :primary})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -205,7 +205,7 @@ describe PhlexyUI::Card do
 
       context "when given multiple responsive options as an array" do
         subject(:output) do
-          render described_class.new(:compact, viewport => [:normal, :primary])
+          render described_class.new(:compact, responsive: {viewport => [:normal, :primary]})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -239,7 +239,7 @@ describe PhlexyUI::Card do
         end
 
         subject(:output) do
-          render described_class.new(:compact, viewport => [:normal, :primary])
+          render described_class.new(:compact, responsive: {viewport => [:normal, :primary]})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -283,7 +283,7 @@ describe PhlexyUI::Card do
         subject(:output) do
           render described_class.new(
             :my_modifier,
-            viewport => :my_other_modifier
+            responsive: {viewport => :my_other_modifier}
           )
         end
 

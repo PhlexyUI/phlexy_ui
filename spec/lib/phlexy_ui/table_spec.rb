@@ -167,7 +167,7 @@ describe PhlexyUI::Table do
     %i[sm md lg].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
         subject(:output) do
-          render described_class.new(:zebra, viewport => :pin_cols)
+          render described_class.new(:zebra, responsive: {viewport => :pin_cols})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -185,7 +185,7 @@ describe PhlexyUI::Table do
 
       context "when given multiple responsive options as an array" do
         subject(:output) do
-          render described_class.new(:zebra, viewport => [:pin_cols, :xs])
+          render described_class.new(:zebra, responsive: {viewport => [:pin_cols, :xs]})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -218,7 +218,7 @@ describe PhlexyUI::Table do
         end
 
         subject(:output) do
-          render described_class.new(:zebra, viewport => [:pin_cols, :xs])
+          render described_class.new(:zebra, responsive: {viewport => [:pin_cols, :xs]})
         end
 
         it "renders it separately with a responsive prefix" do
@@ -261,7 +261,7 @@ describe PhlexyUI::Table do
         subject(:output) do
           render described_class.new(
             :my_modifier,
-            viewport => :my_other_modifier
+            responsive: {viewport => :my_other_modifier}
           )
         end
 
@@ -295,11 +295,33 @@ describe PhlexyUI::Table do
     end
   end
 
+  describe "conditional modifiers" do
+    subject(:output) do
+      render PhlexyUI::Table.new(
+        :zebra,
+        xs: false,
+        sm: true,
+        pin_cols: true,
+        responsive: {sm: :pin_cols}
+      )
+    end
+
+    it "renders it correctly" do
+      expected_html = html <<~HTML
+        <table 
+          class="table table-zebra table-pin-cols table-sm sm:table-pin-cols">
+        </table>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
+
   describe "rendering a full table" do
     let(:component) do
       Class.new(Phlex::HTML) do
         def view_template(&)
-          render PhlexyUI::Table.new(:zebra) do |table|
+          render PhlexyUI::Table.new(:zebra, xs: false, sm: true, pin_cols: true) do |table|
             table.header do |header|
               header.row do |row|
                 row.head { "" }
@@ -345,7 +367,7 @@ describe PhlexyUI::Table do
 
     it "is expected to match the formatted HTML" do
       expected_html = html <<~HTML
-        <table class="table table-zebra">
+        <table class="table table-zebra table-pin-cols table-sm">
           <thead>
             <tr>
               <th></th>

@@ -67,8 +67,10 @@ module PhlexyUI
     end
 
     def add_responsive_modifiers_classes(classes)
+      return unless (responsive_options = options.delete(:responsive))
+
       RESPONSIVE_PREFIXES.each do |responsive_prefix|
-        if (values = options.delete(responsive_prefix))
+        if (values = responsive_options[responsive_prefix])
           classes.concat(
             html_classes_for_modifiers(
               Array(values),
