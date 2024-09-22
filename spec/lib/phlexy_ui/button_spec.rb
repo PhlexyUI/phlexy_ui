@@ -209,4 +209,18 @@ describe PhlexyUI::Button do
       expect(output).to eq(expected_html)
     end
   end
+
+  xdescribe "passing :modal option" do
+    subject(:output) do
+      render described_class.new(:neutral, modal: :my_modal_1)
+    end
+
+    it "renders it correctly" do
+      expected_html = html <<~HTML
+        <button class="btn btn-neutral" onclick="my_modal_1.showModal()"></button>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
 end
