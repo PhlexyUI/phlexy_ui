@@ -19,6 +19,7 @@ module PhlexyUI
       classes = []
       add_component_class(classes)
       add_selected_modifiers_classes(classes)
+      add_conditioned_modifiers_classes(classes)
       add_responsive_modifiers_classes(classes)
       add_class_option_classes(classes)
       classes
@@ -44,6 +45,14 @@ module PhlexyUI
           selected_base_modifiers
         )
       )
+    end
+
+    def add_conditioned_modifiers_classes(classes)
+      modifiers_map.each do |modifier, class_name|
+        next unless options.delete(modifier)
+
+        classes << with_config_prefix(class_name)
+      end
     end
 
     def html_classes_for_modifiers(modifiers, responsive_prefix: nil)
