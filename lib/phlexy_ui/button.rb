@@ -38,6 +38,7 @@ module PhlexyUI
           options[:data][:modal] = modal
           script do
             unsafe_raw <<~JS
+              // Will be replaced with a single line on the <button> once Phlex 2.0 is released.
               (() => {
                 if (window.PhlexyUI && window.PhlexyUI.modalInitialized) {
                   return;
