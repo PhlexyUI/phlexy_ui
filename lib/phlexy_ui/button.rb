@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "phlex/version"
+
 module PhlexyUI
   class Button < Base
     def initialize(*, as: :button, modal: nil, **)
@@ -16,7 +18,17 @@ module PhlexyUI
         options:
       ).then do |classes|
         if modal
-          build_button_via_unsafe_raw(classes, &)
+          if Phlex::VERSION.start_with?("1.")
+            build_button_via_unsafe_raw(classes, &)
+          else
+            public_send(
+              as,
+              class: classes,
+              onclick: safe("#{Phlex::Escape.html_escape(modal)}.showModal()"),
+              **options,
+              &
+            )
+          end
         else
           public_send(as, class: classes, **options, &)
         end
