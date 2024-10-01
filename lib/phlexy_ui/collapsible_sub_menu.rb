@@ -13,19 +13,23 @@ module PhlexyUI
     def view_template(&)
       attributes = generate_attributes(base_modifiers, ATTRIBUTES_MAP)
 
-      details(**attributes) do
-        if @title
-          summary do
-            render @title
+      generate_classes!(
+        options:
+      ).then do |classes|
+        details(**attributes) do
+          if @title
+            summary do
+              render @title
+            end
+          else
+            raise ArgumentError, "A collapsible submenu requires a title"
           end
-        else
-          raise ArgumentError, "A collapsible submenu requires a title"
-        end
 
-        if @items.any?
-          ul do
-            @items.each do |item|
-              render item
+          if @items.any?
+            ul class: classes, **options do
+              @items.each do |item|
+                render item
+              end
             end
           end
         end
