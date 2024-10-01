@@ -237,7 +237,7 @@ describe PhlexyUI::Menu do
             end
 
             menu.item do |item|
-              item.submenu :collapsible, :open, class: "rounded-t-none", data: {my: :collapsible_menus} do |submenu|
+              item.submenu :collapsible, :open, :primary, class: "rounded-t-none", data: {my: :collapsible_menus} do |submenu|
                 submenu.title do
                   "Parent 1"
                 end
@@ -322,7 +322,7 @@ describe PhlexyUI::Menu do
           <li>
             <details open>
               <summary>Parent 1</summary>
-              <ul class="rounded-t-none" data-my="collapsible_menus">
+              <ul class="bg-primary text-primary-content rounded-t-none" data-my="collapsible_menus">
                 <li><a>Child 1</a></li>
                 <li>
                   <details>
