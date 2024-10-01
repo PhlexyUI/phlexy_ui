@@ -55,13 +55,13 @@ describe PhlexyUI::Navbar do
       Class.new(Phlex::HTML) do
         def view_template(&)
           render PhlexyUI::Navbar.new do |navbar|
-            navbar.start do
+            navbar.start class: "start", data: {my: :start} do
             end
 
-            navbar.center do
+            navbar.center class: "center", data: {my: :center} do
             end
 
-            navbar.end do
+            navbar.end class: "end", data: {my: :end} do
             end
           end
         end
@@ -75,9 +75,9 @@ describe PhlexyUI::Navbar do
     it "is expected to match the formatted HTML" do
       expected_html = html <<~HTML
         <nav class="navbar">
-          <div class="navbar-start"></div>
-          <div class="navbar-center"></div>
-          <div class="navbar-end"></div>
+          <div class="navbar-start start" data-my="start"></div>
+          <div class="navbar-center center" data-my="center"></div>
+          <div class="navbar-end end" data-my="end"></div>
         </nav>
       HTML
 

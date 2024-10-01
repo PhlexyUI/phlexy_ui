@@ -18,16 +18,31 @@ module PhlexyUI
       end
     end
 
-    def start(&)
-      div(class: :"navbar-start", &)
+    def start(*, as: :div, **options, &)
+      generate_classes!(
+        component_html_class: :"navbar-start",
+        options:
+      ).then do |classes|
+        public_send(as, class: classes, **options, &)
+      end
     end
 
-    def center(&)
-      div(class: :"navbar-center", &)
+    def center(*, as: :div, **options, &)
+      generate_classes!(
+        component_html_class: :"navbar-center",
+        options:
+      ).then do |classes|
+        public_send(as, class: classes, **options, &)
+      end
     end
 
-    def end(&)
-      div(class: :"navbar-end", &)
+    def end(*, as: :div, **options, &)
+      generate_classes!(
+        component_html_class: :"navbar-end",
+        options:
+      ).then do |classes|
+        public_send(as, class: classes, **options, &)
+      end
     end
 
     register_modifiers(
