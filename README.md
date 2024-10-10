@@ -53,13 +53,44 @@ Install Phlex by following the instructions in the [Phlex documentation](https:/
 bundle add phlexy_ui
 ```
 
-2. Include the `PhlexyUI` module in `ApplicationComponent`:
+2. (Optional) Include the `PhlexyUI` module in `ApplicationComponent`:
 
 ```rb
 class ApplicationComponent < Phlex::HTML
   include PhlexyUI
 end
 ```
+
+This will allow you to use PhlexyUI components using the short-form syntax. For example:
+
+```rb
+class SomeView < ApplicationView
+  def view_template
+    Button :primary do
+      "Hello, world!"
+    end
+  end
+end
+```
+
+If you don't include PhlexyUI, you can still use the namespaced syntax:
+
+```rb
+class SomeView < ApplicationView
+  def view_template
+    PhlexyUI::Button :primary do
+      "Hello, world!"
+    end
+  end
+end
+```
+
+Consider not including PhlexyUI in ApplicationComponent if:
+
+- You have your own component library with the same component names as PhlexyUI.
+- You're including your own components module in `ApplicationComponent`.
+
+In this scenario, including both PhlexyUI and your own component library in `ApplicationComponent` will lead to naming conflicts.
 
 3. Update your `tailwind.config.js` file to include PhlexyUI styles:
 
