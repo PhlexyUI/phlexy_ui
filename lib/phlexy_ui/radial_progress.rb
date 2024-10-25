@@ -20,9 +20,25 @@ module PhlexyUI
         style = options.delete(:style)
 
         if style.nil?
-          style = "--value: #{value}; --size: #{size}; --thickness: #{thickness};"
+          style = "--value: #{value};"
+
+          if size && !size.empty?
+            style += " --size: #{size};"
+          end
+
+          if thickness && !thickness.empty?
+            style += " --thickness: #{thickness};"
+          end
         elsif style.is_a?(String)
-          style = "#{style} --value: #{value}; --size: #{size}; --thickness: #{thickness};"
+          style = "#{style} --value: #{value};"
+
+          if size && !size.empty?
+            style += " --size: #{size};"
+          end
+
+          if thickness && !thickness.empty?
+            style += " --thickness: #{thickness};"
+          end
         end
 
         public_send(as, role: :progressbar, class: classes, style:, **options, &)
