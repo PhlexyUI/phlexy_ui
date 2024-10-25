@@ -233,6 +233,20 @@ describe PhlexyUI::Button do
       expect(output).to eq(expected_html)
     end
 
+    context "when using the :skeleton modifier" do
+      subject(:output) do
+        render described_class.new(:neutral, :skeleton)
+      end
+
+      it "renders it correctly" do
+        expected_html = html <<~HTML
+          <button class="btn btn-neutral skeleton"></button>
+        HTML
+
+        expect(output).to eq(expected_html)
+      end
+    end
+
     # TODO: Not needed once Phlex 2.0 is released.
     context "when passing malicious code via the block" do
       subject(:output) do

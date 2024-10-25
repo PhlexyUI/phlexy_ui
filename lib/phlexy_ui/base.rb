@@ -24,6 +24,7 @@ module PhlexyUI
 
     def modifiers
       {
+        skeleton: :skeleton,
         **self.class.modifiers,
         **PhlexyUI.configuration.modifiers.for(component: self.class),
         **PhlexyUI.configuration.modifiers.for(component: nil)
