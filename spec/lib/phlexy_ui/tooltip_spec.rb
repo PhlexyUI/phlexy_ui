@@ -3,6 +3,34 @@ require "spec_helper"
 describe PhlexyUI::Tooltip do
   subject(:output) { render described_class.new }
 
+  describe "responsiveness" do
+    %i[sm md lg xl].each do |viewport|
+      context "when given an :#{viewport} responsive option as a single argument" do
+        subject(:output) { render described_class.new(responsive: {viewport => true}, tip: "tip") }
+
+        it "renders the component class responsively" do
+          expected_html = html <<~HTML
+            <div class="#{viewport}:tooltip" data-tip="tip"></div>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+
+      context "when given an :#{viewport} responsive option with a boolean and a modifier" do
+        subject(:output) { render described_class.new(responsive: {viewport => [true, :top]}, tip: "tip") }
+
+        it "renders the component class and the modifier class responsively" do
+          expected_html = html <<~HTML
+            <div class="#{viewport}:tooltip #{viewport}:tooltip-top" data-tip="tip"></div>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+    end
+  end
+
   describe "rendering via Kit" do
     subject(:output) do
       Tooltip tip: "A tooltip"
