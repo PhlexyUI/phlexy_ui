@@ -110,7 +110,7 @@ describe PhlexyUI::RadialProgress do
 
     it "is expected to match the formatted HTML" do
       expected_html = html <<~HTML
-        <section role="progressbar" class="radial-progress bg-neutral text-neutral-content border-4"  
+        <section role="progressbar" class="radial-progress bg-neutral text-neutral-content border-neutral border-4"  
              style="background-color: red; --value: 50; --size: 6rem; --thickness: 10%;"
              data-my="radial_progress">50%</section>
       HTML
