@@ -1,8 +1,6 @@
-require_relative "lib/phlexy_ui/version"
-
 Gem::Specification.new do |s|
   s.name = "phlexy_ui"
-  s.version = PhlexyUI::VERSION
+  s.version = "0.1.16"
   s.licenses = ["MIT"]
   s.summary = "PhlexyUI is a Ruby UI component library for DaisyUI using Phlex"
   s.description = "PhlexyUI is a Ruby UI component library for DaisyUI using Phlex"
