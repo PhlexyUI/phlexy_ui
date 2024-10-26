@@ -1,5 +1,3 @@
-require "debug"
-
 module PhlexyUI
   class ClassList
     RESPONSIVE_PREFIXES = %i[sm md lg xl].freeze
