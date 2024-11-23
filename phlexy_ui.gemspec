@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "phlexy_ui"
-  s.version = "0.1.18"
+  s.version = "0.1.20"
   s.licenses = ["MIT"]
   s.summary = "PhlexyUI is a Ruby UI component library for DaisyUI using Phlex"
   s.description = "PhlexyUI is a Ruby UI component library for DaisyUI using Phlex"
