@@ -11,7 +11,7 @@ module PhlexyUI
     end
 
     def view_template(&)
-      attributes = generate_attributes(base_modifiers, ATTRIBUTES_MAP)
+      attributes = generate_attributes(base_modifiers, options, ATTRIBUTES_MAP)
 
       generate_classes!(
         base_modifiers:,

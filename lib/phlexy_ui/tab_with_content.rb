@@ -15,6 +15,7 @@ module PhlexyUI
 
       attributes = generate_attributes(
         base_modifiers,
+        options,
         ATTRIBUTES_MAP
       )
 
@@ -31,7 +32,7 @@ module PhlexyUI
           role: :tab,
           aria_label: title,
           **attributes,
-          **options
+          **options.except(*ATTRIBUTES_MAP.keys)
         )
       end
 

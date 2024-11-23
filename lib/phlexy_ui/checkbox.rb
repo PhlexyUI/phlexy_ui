@@ -3,7 +3,7 @@
 module PhlexyUI
   class Checkbox < Base
     def view_template(&)
-      attributes = generate_attributes(base_modifiers, ATTRIBUTES_MAP)
+      attributes = generate_attributes(base_modifiers, options, ATTRIBUTES_MAP)
 
       generate_classes!(
         component_html_class: :checkbox,
@@ -11,7 +11,13 @@ module PhlexyUI
         base_modifiers:,
         options:
       ).then do |classes|
-        input(type: :checkbox, class: classes, **options, **attributes, &)
+        input(
+          type: :checkbox,
+          class: classes,
+          **options.except(*ATTRIBUTES_MAP.keys),
+          **attributes,
+          &
+        )
       end
     end
 

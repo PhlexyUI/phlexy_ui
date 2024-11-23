@@ -48,8 +48,8 @@ module PhlexyUI
       end
     end
 
-    def generate_attributes(base_modifiers, attributes_map)
-      AttributeSet.new(base_modifiers, attributes_map).to_h
+    def generate_attributes(base_modifiers, options, attributes_map)
+      AttributeSet.new(base_modifiers, options, attributes_map).to_h
     end
 
     def render_as(*, as:, **, &)

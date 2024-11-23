@@ -221,6 +221,48 @@ describe PhlexyUI::Menu do
     end
   end
 
+  describe "conditional modifiers" do
+    subject(:output) do
+      render described_class.new(xs: true, sm: false) do |menu|
+        menu.title { "My Menu" }
+      end
+    end
+
+    it "renders it correctly" do
+      expected_html = html <<~HTML
+        <ul class="menu menu-xs">
+          <li class="menu-title">My Menu</li>
+        </ul>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
+
+  describe "conditional attributes on collapsible submenu" do
+    subject(:output) do
+      render described_class.new do |menu|
+        menu.submenu(:collapsible, open: true) do |submenu|
+          submenu.title { "My Submenu" }
+        end
+      end
+    end
+
+    it "renders it correctly" do
+      expected_html = html <<~HTML
+        <ul class="menu">
+          <li>
+            <details open>
+              <summary>My Submenu</summary>
+            </details>
+          </li>
+        </ul>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
+
   describe "rendering a full menu" do
     let(:component) do
       Class.new(Phlex::HTML) do

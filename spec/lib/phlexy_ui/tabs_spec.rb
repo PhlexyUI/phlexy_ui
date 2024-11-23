@@ -208,6 +208,64 @@ describe PhlexyUI::Tabs do
     end
   end
 
+  describe "conditional attributes" do
+    let(:component) do
+      Class.new(Phlex::HTML) do
+        def view_template(&)
+          render PhlexyUI::Tabs.new id: "my_tabs" do |tabs|
+            tabs.tab "Tab 1", :closed, open: true do |tab|
+              tab.content do
+                "Tab content 1"
+              end
+            end
+
+            tabs.tab "Tab 2", :open, closed: true do |tab|
+              tab.content do
+                "Tab content 2"
+              end
+            end
+
+            tabs.tab "Tab 3", :open, closed: false do |tab|
+              tab.content do
+                "Tab content 3"
+              end
+            end
+
+            tabs.tab "Tab 4", :closed, open: false do |tab|
+              tab.content do
+                "Tab content 4"
+              end
+            end
+          end
+        end
+      end
+    end
+
+    subject(:output) do
+      render component.new
+    end
+
+    it "is expected to match the formatted HTML" do
+      expected_html = html <<~HTML
+        <div role="tablist" class="tabs">
+          <input type="radio" name="my_tabs" class="tab" role="tab" aria-label="Tab 1" closed checked>
+          <div role="tabpanel" class="tab-content">Tab content 1</div>
+
+          <input type="radio" name="my_tabs" class="tab" role="tab" aria-label="Tab 2" checked closed>
+          <div role="tabpanel" class="tab-content">Tab content 2</div>
+
+          <input type="radio" name="my_tabs" class="tab" role="tab" aria-label="Tab 3" checked>
+          <div role="tabpanel" class="tab-content">Tab content 3</div>
+
+          <input type="radio" name="my_tabs" class="tab" role="tab" aria-label="Tab 4" closed>
+          <div role="tabpanel" class="tab-content">Tab content 4</div>
+        </div>
+      HTML
+
+      is_expected.to eq(expected_html)
+    end
+  end
+
   describe "rendering full tabs with content" do
     let(:component) do
       Class.new(Phlex::HTML) do
