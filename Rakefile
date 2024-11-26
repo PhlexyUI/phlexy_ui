@@ -27,7 +27,7 @@ namespace :release do
       module PhlexyUI
         # This timestamp is automatically updated when releasing a new version
         # Format: YYYY-MM-DD HH:MM:SS UTC
-        UPDATED_AT = "#{timestamp}".freeze
+        UPDATED_AT = "#{timestamp}"
       end
     RUBY
 
