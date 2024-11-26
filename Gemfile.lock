@@ -29,6 +29,7 @@ GEM
       stringio
     racc (1.8.1)
     rainbow (3.1.1)
+    rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
@@ -90,6 +91,7 @@ PLATFORMS
 DEPENDENCIES
   debug (~> 1.9, >= 1.9.2)
   phlexy_ui!
+  rake (~> 13.0)
   rspec (~> 3.13.0)
   standard (~> 1.39.2)
 
