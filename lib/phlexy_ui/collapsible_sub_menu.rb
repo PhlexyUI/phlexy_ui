@@ -3,8 +3,6 @@
 module PhlexyUI
   # @private
   class CollapsibleSubMenu < Base
-    include Phlex::DeferredRender
-
     def initialize(*, **)
       super
       @items ||= []
@@ -51,6 +49,11 @@ module PhlexyUI
     end
 
     private
+
+    def before_template(&)
+      vanish(&)
+      super
+    end
 
     ATTRIBUTES_MAP = {
       open: true

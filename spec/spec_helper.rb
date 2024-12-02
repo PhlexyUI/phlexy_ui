@@ -2,7 +2,7 @@ require "bundler/setup"
 Bundler.setup
 
 require "phlexy_ui"
-require "phlex/testing/view_helper"
+require "phlex/testing"
 
 Dir["./spec/support/**/*.rb"].each do |f|
   require f

@@ -3,8 +3,6 @@
 module PhlexyUI
   # @private
   class Tab < Base
-    include Phlex::DeferredRender
-
     def initialize(*, id: nil, **)
       super(*, **)
       @id = id
@@ -38,6 +36,13 @@ module PhlexyUI
           div role: :tabpanel, class: classes, **options, &
         end
       end
+    end
+
+    private 
+
+    def before_template(&)
+      vanish(&)
+      super
     end
   end
 end

@@ -3,8 +3,6 @@
 module PhlexyUI
   # @private
   class SubMenu < Base
-    include Phlex::DeferredRender
-
     def initialize(*, **)
       super
       @items ||= []
@@ -32,6 +30,13 @@ module PhlexyUI
 
     def item(*, **, &)
       @items << MenuItem.new(*, **, &)
+    end
+
+    private 
+
+    def before_template(&)
+      vanish(&)
+      super
     end
   end
 end

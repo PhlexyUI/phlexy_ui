@@ -10,6 +10,16 @@ module PhlexHelpers
   end
 end
 
+module Phlex
+  module Testing
+    module ViewHelper
+      include Phlex::Testing::SGML
+
+      alias render render_to_string
+    end
+  end
+end
+
 RSpec.configure do |config|
   config.include Phlex::Testing::ViewHelper
   config.include PhlexHelpers
