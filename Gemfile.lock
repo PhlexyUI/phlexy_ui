@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    phlexy_ui (0.1.22)
+    phlexy_ui (0.2.0)
       phlex (>= 2.0.0.rc1)
       zeitwerk (~> 2.6)
 
