@@ -18,17 +18,13 @@ module PhlexyUI
         options:
       ).then do |classes|
         if modal
-          if Phlex::VERSION.start_with?("1.")
-            build_button_via_unsafe_raw(classes, &)
-          else
-            public_send(
-              as,
-              class: classes,
-              onclick: safe("#{Phlex::Escape.html_escape(modal)}.showModal()"),
-              **options,
-              &
-            )
-          end
+          public_send(
+            as,
+            class: classes,
+            onclick: safe("#{Phlex::Escape.html_escape(modal)}.showModal()"),
+            **options,
+            &
+          )
         else
           public_send(as, class: classes, **options, &)
         end
