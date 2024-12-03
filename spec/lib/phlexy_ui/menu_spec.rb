@@ -279,7 +279,7 @@ describe PhlexyUI::Menu do
             end
 
             menu.item do |item|
-              item.submenu :collapsible, :open, :primary, class: "rounded-t-none", data: {my: :collapsible_menus} do |submenu|
+              item.submenu :collapsible, :open, :primary, class: "rounded-t-none", data: {my: "collapsible_menus"} do |submenu|
                 submenu.title do
                   "Parent 1"
                 end

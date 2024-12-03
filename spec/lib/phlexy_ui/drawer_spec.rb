@@ -184,7 +184,7 @@ describe PhlexyUI::Drawer do
     let(:component) do
       Class.new(Phlex::HTML) do
         def view_template(&)
-          render PhlexyUI::Drawer.new(:end, id: :my_drawer) do |drawer|
+          render PhlexyUI::Drawer.new(:end, id: "my_drawer") do |drawer|
             drawer.toggle(class: "my-toggle", data: {my: "toggles"})
             drawer.content(class: "my-content", data: {my: "contents"}) do
               drawer.button(:primary, class: "my-button", data: {my: "buttons"}) do

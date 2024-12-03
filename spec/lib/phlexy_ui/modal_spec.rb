@@ -11,7 +11,7 @@ describe PhlexyUI::Modal do
             "Open Modal"
           end
 
-          render PhlexyUI::Modal.new(id: :my_modal_1) do |modal|
+          render PhlexyUI::Modal.new(id: "my_modal_1") do |modal|
             modal.body do
               h3 do
                 "Hello!"
@@ -64,7 +64,7 @@ describe PhlexyUI::Modal do
             "Open Modal"
           end
 
-          render PhlexyUI::Modal.new(:tap_outside_to_close, id: :my_modal_1) do |modal|
+          render PhlexyUI::Modal.new(:tap_outside_to_close, id: "my_modal_1") do |modal|
             modal.body do
               h3 do
                 "Hello!"
@@ -109,7 +109,7 @@ describe PhlexyUI::Modal do
             "Open Modal"
           end
 
-          render PhlexyUI::Modal.new(id: :my_modal_1) do |modal|
+          render PhlexyUI::Modal.new(id: "my_modal_1") do |modal|
             modal.body do
               modal.close_button :sm, :circle, :ghost, class: "absolute right-2 top-2" do
                 "✕"

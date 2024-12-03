@@ -215,8 +215,8 @@ describe PhlexyUI::Button do
       render described_class.new(
         :neutral,
         class: "my-class",
-        modal: :my_modal_1,
-        data: {my: :modals}
+        modal: "my_modal_1",
+        data: {my: "modals"}
       ) do
         "Click me"
       end
@@ -226,8 +226,8 @@ describe PhlexyUI::Button do
       expected_html = html <<~HTML
         <button 
           class="btn btn-neutral my-class" 
-          data-my="modals" 
-          onclick="my_modal_1.showModal()">Click me</button>
+          onclick="my_modal_1.showModal()"
+          data-my="modals">Click me</button>
       HTML
 
       expect(output).to eq(expected_html)
@@ -247,44 +247,6 @@ describe PhlexyUI::Button do
       end
     end
 
-    # TODO: Not needed once Phlex 2.0 is released.
-    context "when passing malicious code via the block" do
-      subject(:output) do
-        render described_class.new(:neutral, modal: :my_modal_1) do
-          "<script>alert('XSS');</script>"
-        end
-      end
-
-      it "escapes the code" do
-        expected_html = html <<~HTML
-          <button 
-            class="btn btn-neutral" 
-            onclick="my_modal_1.showModal()">&lt;script&gt;alert(&#39;XSS&#39;);&lt;/script&gt;</button>
-        HTML
-
-        expect(output).to eq(expected_html)
-      end
-    end
-
-    # TODO: Not needed once Phlex 2.0 is released.
-    context "when passing malicious code via the onclick option" do
-      subject(:output) do
-        render described_class.new(
-          :neutral,
-          :modal => :my_modal_1,
-          "onclick" => "<script>alert('XSS');</script>"
-        )
-      end
-
-      it "escapes the code" do
-        expected_html = "<button class=\"btn btn-neutral\" " \
-          "onclick=\"&lt;script&gt;alert(&#39;XSS&#39;);&lt;/script&gt;\" " \
-          "onclick=\"my_modal_1.showModal()\"></button>"
-
-        expect(output).to eq(expected_html)
-      end
-    end
-
     context "when passing malicious code via the modal option" do
       subject(:output) do
         render described_class.new(:neutral, modal: %(" onclick="alert('XSS') //;))
@@ -297,25 +259,6 @@ describe PhlexyUI::Button do
             onclick="&quot; onclick=&quot;alert(&#39;XSS&#39;) //;.showModal()">
           </button>
         HTML
-
-        expect(output).to eq(expected_html)
-      end
-    end
-
-    # TODO: Not needed once Phlex 2.0 is released.
-    context "when passing malicious code via the class option" do
-      subject(:output) do
-        render described_class.new(
-          :neutral,
-          modal: :my_modal_1,
-          class: %(" onclick="alert('XSS');)
-        )
-      end
-
-      it "escapes the code" do
-        expected_html = "<button class=\"btn btn-neutral &quot; " \
-          "onclick=&quot;alert(&#39;XSS&#39;);\" " \
-          "onclick=\"my_modal_1.showModal()\"></button>"
 
         expect(output).to eq(expected_html)
       end
