@@ -10,7 +10,7 @@ module PhlexyUI
 
     def view_template(&)
       yield(self) if block_given?
-      
+
       attributes = generate_attributes(base_modifiers, options, ATTRIBUTES_MAP)
 
       generate_classes!(

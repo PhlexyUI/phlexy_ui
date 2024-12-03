@@ -10,7 +10,7 @@ module PhlexyUI
 
     def view_template(&)
       yield(self) if block_given?
-      
+
       if @content
         render TabWithContent.new(
           *base_modifiers,

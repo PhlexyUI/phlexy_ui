@@ -15,7 +15,7 @@ module Phlex
     module ViewHelper
       include Phlex::Testing::SGML
 
-      alias render render_to_string
+      alias_method :render, :render_to_string
     end
   end
 end
