@@ -3,14 +3,14 @@
 module PhlexyUI
   # @private
   class Tab < Base
-    include Phlex::DeferredRender
-
     def initialize(*, id: nil, **)
       super(*, **)
       @id = id
     end
 
     def view_template(&)
+      yield(self) if block_given?
+
       if @content
         render TabWithContent.new(
           *base_modifiers,

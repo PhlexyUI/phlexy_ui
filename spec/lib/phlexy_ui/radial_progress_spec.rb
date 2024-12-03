@@ -95,7 +95,7 @@ describe PhlexyUI::RadialProgress do
             style: "background-color: red;",
             as: :section,
             data: {
-              my: :radial_progress
+              my: "radial_progress"
             }
           ) do
             "50%"

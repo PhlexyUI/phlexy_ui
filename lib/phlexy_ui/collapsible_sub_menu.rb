@@ -3,14 +3,14 @@
 module PhlexyUI
   # @private
   class CollapsibleSubMenu < Base
-    include Phlex::DeferredRender
-
     def initialize(*, **)
       super
       @items ||= []
     end
 
     def view_template(&)
+      yield(self) if block_given?
+
       attributes = generate_attributes(base_modifiers, options, ATTRIBUTES_MAP)
 
       generate_classes!(

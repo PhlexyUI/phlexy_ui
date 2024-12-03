@@ -3,14 +3,14 @@
 module PhlexyUI
   # @private
   class SubMenu < Base
-    include Phlex::DeferredRender
-
     def initialize(*, **)
       super
       @items ||= []
     end
 
     def view_template(&)
+      yield(self) if block_given?
+
       if @title
         div do
           render @title

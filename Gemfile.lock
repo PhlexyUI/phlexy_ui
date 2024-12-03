@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     phlexy_ui (0.1.22)
-      phlex (>= 1.10)
+      phlex (>= 2.0.0.rc1)
       zeitwerk (~> 2.6)
 
 GEM
@@ -24,7 +24,7 @@ GEM
     parser (3.3.4.0)
       ast (~> 2.4.1)
       racc
-    phlex (1.11.0)
+    phlex (2.0.0.rc1)
     psych (5.1.2)
       stringio
     racc (1.8.1)
