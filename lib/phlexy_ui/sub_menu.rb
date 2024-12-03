@@ -9,6 +9,8 @@ module PhlexyUI
     end
 
     def view_template(&)
+      yield(self) if block_given?
+
       if @title
         div do
           render @title
@@ -30,13 +32,6 @@ module PhlexyUI
 
     def item(*, **, &)
       @items << MenuItem.new(*, **, &)
-    end
-
-    private 
-
-    def before_template(&)
-      vanish(&)
-      super
     end
   end
 end

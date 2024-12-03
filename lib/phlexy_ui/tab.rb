@@ -9,6 +9,8 @@ module PhlexyUI
     end
 
     def view_template(&)
+      yield(self) if block_given?
+      
       if @content
         render TabWithContent.new(
           *base_modifiers,
@@ -36,13 +38,6 @@ module PhlexyUI
           div role: :tabpanel, class: classes, **options, &
         end
       end
-    end
-
-    private 
-
-    def before_template(&)
-      vanish(&)
-      super
     end
   end
 end

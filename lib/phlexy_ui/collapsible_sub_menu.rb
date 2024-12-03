@@ -9,6 +9,8 @@ module PhlexyUI
     end
 
     def view_template(&)
+      yield(self) if block_given?
+      
       attributes = generate_attributes(base_modifiers, options, ATTRIBUTES_MAP)
 
       generate_classes!(
@@ -49,11 +51,6 @@ module PhlexyUI
     end
 
     private
-
-    def before_template(&)
-      vanish(&)
-      super
-    end
 
     ATTRIBUTES_MAP = {
       open: true
