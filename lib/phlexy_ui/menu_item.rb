@@ -9,7 +9,7 @@ module PhlexyUI
         base_modifiers:,
         options:
       ).then do |classes|
-        li(class: classes, &)
+        li(class: classes, **options, &)
       end
     end
 

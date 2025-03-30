@@ -278,19 +278,19 @@ describe PhlexyUI::Menu do
               end
             end
 
-            menu.item do |item|
+            menu.item data: {my: "item_menus"} do |item|
               item.submenu :collapsible, :open, :primary, class: "rounded-t-none", data: {my: "collapsible_menus"} do |submenu|
                 submenu.title do
                   "Parent 1"
                 end
 
-                submenu.item do |submenu_item|
+                submenu.item data: {my: "submenu_item"} do |submenu_item|
                   a do
                     "Child 1"
                   end
                 end
 
-                submenu.item do |submenu_item|
+                submenu.item data: {my: "another_submenu_item"} do |submenu_item|
                   submenu_item.submenu :collapsible do |submenu_2|
                     submenu_2.title do
                       "Parent 2"
@@ -361,12 +361,12 @@ describe PhlexyUI::Menu do
         <ul class="menu bg-base-200 w-52">
           <li class="menu-title">My Menu</li>
           <li class="disabled"><a>Item 1</a></li>
-          <li>
+          <li data-my="item_menus">
             <details open>
               <summary>Parent 1</summary>
               <ul class="bg-primary text-primary-content rounded-t-none" data-my="collapsible_menus">
-                <li><a>Child 1</a></li>
-                <li>
+                <li data-my="submenu_item"><a>Child 1</a></li>
+                <li data-my="another_submenu_item">
                   <details>
                     <summary>Parent 2</summary>
                     <ul>
