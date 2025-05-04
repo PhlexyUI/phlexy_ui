@@ -65,10 +65,12 @@ module PhlexyUI
         # "sm:drawer-end"
         # "md:drawer-end"
         # "lg:drawer-end"
+        # "xl:drawer-end"
       end: "drawer-end",
       # "sm:drawer-open"
       # "md:drawer-open"
       # "lg:drawer-open"
+      # "xl:drawer-open"
       open: "drawer-open"
     )
   end
