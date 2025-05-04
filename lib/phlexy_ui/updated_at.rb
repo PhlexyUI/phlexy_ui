@@ -3,5 +3,5 @@
 module PhlexyUI
   # This timestamp is automatically updated when releasing a new version
   # Format: YYYY-MM-DD HH:MM:SS UTC
-  UPDATED_AT = "2025-03-30 20:42:03 UTC"
+  UPDATED_AT = "2025-05-04 20:22:57 UTC"
 end
