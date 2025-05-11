@@ -53,7 +53,9 @@ module PhlexyUI
     end
 
     def close_button(*, **, &)
-      render PhlexyUI::Button.new(*, type: :button, command: "close", **, &)
+      form method: :dialog do
+        render PhlexyUI::Button.new(*, **, &)
+      end
     end
 
     private
