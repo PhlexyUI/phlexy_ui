@@ -44,9 +44,7 @@ describe PhlexyUI::Modal do
             <h3>Hello!</h3>
             <p>Press ESC key or click the button below to close</p>
             <div class="modal-action">
-              <form method="dialog">
-                <button class="btn btn-primary">Close</button>
-              </form>
+              <button class="btn btn-primary" type="button" command="close">Close</button>
             </div>
           </div>
         </dialog>
@@ -137,9 +135,7 @@ describe PhlexyUI::Modal do
         <button class="btn">Open Modal</button>
         <dialog id="my_modal_1" class="modal">
           <div class="modal-box">
-            <form method="dialog">
-              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-            </form>
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" type="button" command="close">✕</button>
             <h3>Hello!</h3>
             <p>Press ESC key or click the button below to close</p>
           </div>
