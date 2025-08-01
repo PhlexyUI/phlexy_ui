@@ -63,14 +63,22 @@ module PhlexyUI
 
     register_modifiers(
         # "sm:drawer-end"
+        # "@sm:drawer-end"
         # "md:drawer-end"
+        # "@md:drawer-end"
         # "lg:drawer-end"
+        # "@lg:drawer-end"
         # "xl:drawer-end"
+        # "@xl:drawer-end"
       end: "drawer-end",
       # "sm:drawer-open"
+      # "@sm:drawer-open"
       # "md:drawer-open"
+      # "@md:drawer-open"
       # "lg:drawer-open"
+      # "@lg:drawer-open"
       # "xl:drawer-open"
+      # "@xl:drawer-open"
       open: "drawer-open"
     )
   end

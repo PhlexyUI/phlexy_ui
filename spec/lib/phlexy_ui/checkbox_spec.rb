@@ -3,6 +3,38 @@ require "spec_helper"
 describe PhlexyUI::Checkbox do
   subject(:output) { render described_class.new }
 
+  describe "responsiveness" do
+    %i[sm md lg xl @sm @md @lg @xl].each do |viewport|
+      context "when given an :#{viewport} responsive option as a single argument" do
+        subject(:output) do
+          render described_class.new(:primary, responsive: {viewport => :lg})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <input type="checkbox" class="checkbox checkbox-primary #{viewport}:checkbox-lg">
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+
+      context "when given multiple responsive options as an array" do
+        subject(:output) do
+          render described_class.new(:primary, responsive: {viewport => [:lg, :secondary]})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <input type="checkbox" class="checkbox checkbox-primary #{viewport}:checkbox-lg #{viewport}:checkbox-secondary">
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+    end
+  end
+
   describe "conditional attributes" do
     let(:component) do
       Class.new(Phlex::HTML) do

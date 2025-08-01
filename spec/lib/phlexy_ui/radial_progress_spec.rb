@@ -1,7 +1,39 @@
 require "spec_helper"
 
 describe PhlexyUI::RadialProgress do
-  subject(:output) { render described_class.new }
+  subject(:output) { render described_class.new(value: 50) }
+
+  describe "responsiveness" do
+    %i[sm md lg xl @sm @md @lg @xl].each do |viewport|
+      context "when given an :#{viewport} responsive option as a single argument" do
+        subject(:output) do
+          render described_class.new(:neutral, value: 50, responsive: {viewport => :primary})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <div role="progressbar" class="radial-progress bg-neutral text-neutral-content border-neutral #{viewport}:bg-primary #{viewport}:text-primary-content #{viewport}:border-primary" style="--value: 50;"></div>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+
+      context "when given multiple responsive options as an array" do
+        subject(:output) do
+          render described_class.new(:neutral, value: 50, responsive: {viewport => [:primary, :info]})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <div role="progressbar" class="radial-progress bg-neutral text-neutral-content border-neutral #{viewport}:bg-primary #{viewport}:text-primary-content #{viewport}:border-primary #{viewport}:bg-info #{viewport}:text-info-content #{viewport}:border-info" style="--value: 50;"></div>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+    end
+  end
 
   context "when size and thickness are not provided" do
     let(:component) do

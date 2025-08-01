@@ -4,7 +4,7 @@ describe PhlexyUI::Tooltip do
   subject(:output) { render described_class.new }
 
   describe "responsiveness" do
-    %i[sm md lg xl].each do |viewport|
+    %i[sm md lg xl @sm @md @lg @xl].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
         subject(:output) { render described_class.new(responsive: {viewport => true}, tip: "tip") }
 

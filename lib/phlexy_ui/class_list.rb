@@ -1,6 +1,6 @@
 module PhlexyUI
   class ClassList
-    RESPONSIVE_PREFIXES = %i[sm md lg xl].freeze
+    RESPONSIVE_PREFIXES = %i[sm md lg xl @sm @md @lg @xl].freeze
 
     def initialize(
       component:,

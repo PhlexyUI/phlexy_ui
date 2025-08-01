@@ -1,7 +1,39 @@
 require "spec_helper"
 
 describe PhlexyUI::Modal do
-  subject(:output) { render described_class.new }
+  subject(:output) { render described_class.new(id: "test_modal") }
+
+  describe "responsiveness" do
+    %i[sm md lg xl @sm @md @lg @xl].each do |viewport|
+      context "when given an :#{viewport} responsive option as a single argument" do
+        subject(:output) do
+          render described_class.new(:open, id: "test_modal", responsive: {viewport => :top})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <dialog id="test_modal" class="modal modal-open #{viewport}:modal-top"></dialog>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+
+      context "when given multiple responsive options as an array" do
+        subject(:output) do
+          render described_class.new(:open, id: "test_modal", responsive: {viewport => [:top, :middle]})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <dialog id="test_modal" class="modal modal-open #{viewport}:modal-top #{viewport}:modal-middle"></dialog>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+    end
+  end
 
   describe "rendering a full modal" do
     let(:component) do

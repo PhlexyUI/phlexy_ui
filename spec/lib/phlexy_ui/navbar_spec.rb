@@ -3,6 +3,38 @@ require "spec_helper"
 describe PhlexyUI::Navbar do
   subject(:output) { render described_class.new }
 
+  describe "responsiveness" do
+    %i[sm md lg xl @sm @md @lg @xl].each do |viewport|
+      context "when given an :#{viewport} responsive option as a single argument" do
+        subject(:output) do
+          render described_class.new(:neutral, responsive: {viewport => :primary})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <nav class="navbar bg-neutral text-neutral-content #{viewport}:bg-primary #{viewport}:text-primary-content"></nav>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+
+      context "when given multiple responsive options as an array" do
+        subject(:output) do
+          render described_class.new(:neutral, responsive: {viewport => [:primary, :info]})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <nav class="navbar bg-neutral text-neutral-content #{viewport}:bg-primary #{viewport}:text-primary-content #{viewport}:bg-info #{viewport}:text-info-content"></nav>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+    end
+  end
+
   describe "modifiers" do
     {
       primary: "bg-primary text-primary-content",

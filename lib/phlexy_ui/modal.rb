@@ -62,20 +62,32 @@ module PhlexyUI
 
     register_modifiers(
       # "sm:modal-open"
+      # "@sm:modal-open"
       # "md:modal-open"
+      # "@md:modal-open"
       # "lg:modal-open"
+      # "@lg:modal-open"
       open: "modal-open",
       # "sm:modal-top"
+      # "@sm:modal-top"
       # "md:modal-top"
+      # "@md:modal-top"
       # "lg:modal-top"
+      # "@lg:modal-top"
       top: "modal-top",
       # "sm:modal-bottom"
+      # "@sm:modal-bottom"
       # "md:modal-bottom"
+      # "@md:modal-bottom"
       # "lg:modal-bottom"
+      # "@lg:modal-bottom"
       bottom: "modal-bottom",
       # "sm:modal-middle"
+      # "@sm:modal-middle"
       # "md:modal-middle"
+      # "@md:modal-middle"
       # "lg:modal-middle"
+      # "@lg:modal-middle"
       middle: "modal-middle"
     )
   end

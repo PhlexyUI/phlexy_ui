@@ -50,12 +50,18 @@ module PhlexyUI
 
     register_modifiers(
       # "sm:tab-active"
+      # "@sm:tab-active"
       # "md:tab-active"
+      # "@md:tab-active"
       # "lg:tab-active"
+      # "@lg:tab-active"
       active: "tab-active",
       # "sm:tab-disabled"
+      # "@sm:tab-disabled"
       # "md:tab-disabled"
+      # "@md:tab-disabled"
       # "lg:tab-disabled"
+      # "@lg:tab-disabled"
       disabled: "tab-disabled"
     )
   end

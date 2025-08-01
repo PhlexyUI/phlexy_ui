@@ -3,6 +3,38 @@ require "spec_helper"
 describe PhlexyUI::Badge do
   subject(:output) { render described_class.new }
 
+  describe "responsiveness" do
+    %i[sm md lg xl @sm @md @lg @xl].each do |viewport|
+      context "when given an :#{viewport} responsive option as a single argument" do
+        subject(:output) do
+          render described_class.new(:neutral, responsive: {viewport => :primary})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <span class="badge badge-neutral #{viewport}:badge-primary"></span>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+
+      context "when given multiple responsive options as an array" do
+        subject(:output) do
+          render described_class.new(:neutral, responsive: {viewport => [:primary, :lg]})
+        end
+
+        it "renders it separately with a responsive prefix" do
+          expected_html = html <<~HTML
+            <span class="badge badge-neutral #{viewport}:badge-primary #{viewport}:badge-lg"></span>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+    end
+  end
+
   describe "rendering a full badge" do
     let(:component) do
       Class.new(Phlex::HTML) do

@@ -164,7 +164,7 @@ describe PhlexyUI::Table do
   end
 
   describe "responsiveness" do
-    %i[sm md lg].each do |viewport|
+    %i[sm md lg xl @sm @md @lg @xl].each do |viewport|
       context "when given an :#{viewport} responsive option as a single argument" do
         subject(:output) do
           render described_class.new(:zebra, responsive: {viewport => :pin_cols})

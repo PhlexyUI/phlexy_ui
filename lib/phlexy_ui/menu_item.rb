@@ -34,16 +34,25 @@ module PhlexyUI
 
     register_modifiers(
       # "sm:disabled"
+      # "@sm:disabled"
       # "md:disabled"
+      # "@md:disabled"
       # "lg:disabled"
+      # "@lg:disabled"
       disabled: "disabled",
       # "sm:active"
+      # "@sm:active"
       # "md:active"
+      # "@md:active"
       # "lg:active"
+      # "@lg:active"
       active: "active",
       # "sm:focus"
+      # "@sm:focus"
       # "md:focus"
+      # "@md:focus"
       # "lg:focus"
+      # "@lg:focus"
       focus: "focus"
     )
   end
