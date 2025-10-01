@@ -6,6 +6,7 @@ module PhlexyUI
       attributes = generate_attributes(base_modifiers, options, ATTRIBUTES_MAP)
 
       generate_classes!(
+        # "checkbox"
         component_html_class: :checkbox,
         modifiers_map: modifiers,
         base_modifiers:,

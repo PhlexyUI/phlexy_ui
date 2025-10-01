@@ -15,6 +15,7 @@ module PhlexyUI
 
     def title(*, **options, &block)
       generate_classes!(
+        # "menu-title"
         component_html_class: :"menu-title",
         options:
       ).then do |classes|

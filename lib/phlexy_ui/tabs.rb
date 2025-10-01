@@ -10,6 +10,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "tabs"
         component_html_class: :tabs,
         modifiers_map: modifiers,
         base_modifiers:,

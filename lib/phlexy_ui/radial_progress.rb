@@ -12,6 +12,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "radial-progress"
         component_html_class: :"radial-progress",
         modifiers_map: modifiers,
         base_modifiers:,

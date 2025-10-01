@@ -12,6 +12,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "btn"
         component_html_class: :btn,
         modifiers_map: modifiers,
         base_modifiers:,

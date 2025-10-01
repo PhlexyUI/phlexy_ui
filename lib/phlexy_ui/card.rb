@@ -9,6 +9,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "card"
         component_html_class: :card,
         modifiers_map: modifiers,
         base_modifiers:,
@@ -20,6 +21,7 @@ module PhlexyUI
 
     def body(**options, &)
       generate_classes!(
+        # "card-body"
         component_html_class: :"card-body",
         options:
       ).then do |classes|
@@ -29,6 +31,7 @@ module PhlexyUI
 
     def title(**options, &)
       generate_classes!(
+        # "card-title"
         component_html_class: :"card-title",
         options:
       ).then do |classes|
@@ -38,6 +41,7 @@ module PhlexyUI
 
     def actions(**options, &)
       generate_classes!(
+        # "card-actions"
         component_html_class: :"card-actions",
         options:
       ).then do |classes|

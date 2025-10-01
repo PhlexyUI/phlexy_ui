@@ -4,6 +4,7 @@ module PhlexyUI
   class Table < Base
     def view_template(&)
       generate_classes!(
+        # "table"
         component_html_class: :table,
         modifiers_map: modifiers,
         base_modifiers:,

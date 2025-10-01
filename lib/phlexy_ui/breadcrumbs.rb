@@ -9,6 +9,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "breadcrumbs"
         component_html_class: :breadcrumbs,
         modifiers_map: modifiers,
         base_modifiers:,

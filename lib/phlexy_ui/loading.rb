@@ -9,6 +9,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "loading"
         component_html_class: :loading,
         modifiers_map: modifiers,
         base_modifiers:,

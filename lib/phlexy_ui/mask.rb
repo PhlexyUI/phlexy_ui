@@ -9,6 +9,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "mask"
         component_html_class: :mask,
         modifiers_map: modifiers,
         base_modifiers:,

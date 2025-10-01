@@ -9,6 +9,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "dropdown"
         component_html_class: :dropdown,
         modifiers_map: modifiers,
         base_modifiers:,
@@ -32,6 +33,7 @@ module PhlexyUI
 
     def content(*, as: :div, **options, &)
       generate_classes!(
+        # "dropdown-content"
         component_html_class: :"dropdown-content",
         options:
       ).then do |classes|
@@ -45,6 +47,7 @@ module PhlexyUI
 
     def menu(*, **options, &)
       generate_classes!(
+        # "dropdown-content"
         component_html_class: :"dropdown-content",
         options:
       ).then do |classes|

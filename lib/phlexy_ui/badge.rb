@@ -9,6 +9,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "badge"
         component_html_class: :badge,
         modifiers_map: modifiers,
         base_modifiers:,

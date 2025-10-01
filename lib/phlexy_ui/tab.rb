@@ -32,6 +32,7 @@ module PhlexyUI
 
       @content = -> do
         generate_classes!(
+          # "tab-content"
           component_html_class: :"tab-content",
           options:
         ).then do |classes|

@@ -10,6 +10,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "tooltip"
         component_html_class: :tooltip,
         modifiers_map: modifiers,
         base_modifiers:,

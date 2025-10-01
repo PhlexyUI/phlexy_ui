@@ -4,6 +4,7 @@ module PhlexyUI
   class Menu < Base
     def view_template(&)
       generate_classes!(
+        # "menu"
         component_html_class: :menu,
         modifiers_map: modifiers,
         base_modifiers:,
@@ -15,6 +16,7 @@ module PhlexyUI
 
     def title(*, as: :li, **options, &)
       generate_classes!(
+        # "menu-title"
         component_html_class: :"menu-title",
         options:
       ).then do |classes|

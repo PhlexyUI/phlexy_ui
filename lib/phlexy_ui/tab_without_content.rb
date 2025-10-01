@@ -5,6 +5,7 @@ module PhlexyUI
   class TabWithoutContent < Base
     def view_template(&)
       generate_classes!(
+        # "tab"
         component_html_class: :tab,
         modifiers_map: modifiers,
         base_modifiers:,

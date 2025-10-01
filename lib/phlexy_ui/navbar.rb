@@ -9,6 +9,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "navbar"
         component_html_class: :navbar,
         modifiers_map: modifiers,
         base_modifiers:,
@@ -20,6 +21,7 @@ module PhlexyUI
 
     def start(*, as: :div, **options, &)
       generate_classes!(
+        # "navbar-start"
         component_html_class: :"navbar-start",
         options:
       ).then do |classes|
@@ -29,6 +31,7 @@ module PhlexyUI
 
     def center(*, as: :div, **options, &)
       generate_classes!(
+        # "navbar-center"
         component_html_class: :"navbar-center",
         options:
       ).then do |classes|
@@ -38,6 +41,7 @@ module PhlexyUI
 
     def end(*, as: :div, **options, &)
       generate_classes!(
+        # "navbar-end"
         component_html_class: :"navbar-end",
         options:
       ).then do |classes|

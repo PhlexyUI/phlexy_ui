@@ -4,6 +4,7 @@ module PhlexyUI
   class Label < Base
     def view_template(&)
       generate_classes!(
+        # "label"
         component_html_class: :label,
         options:
       ).then do |classes|
@@ -13,6 +14,7 @@ module PhlexyUI
 
     def text(as: :span, **options, &)
       generate_classes!(
+        # "label-text"
         component_html_class: :"label-text",
         options:
       ).then do |classes|

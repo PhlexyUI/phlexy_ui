@@ -9,6 +9,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "avatar-group"
         component_html_class: :"avatar-group",
         options:
       ).then do |classes|

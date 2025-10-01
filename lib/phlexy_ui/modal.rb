@@ -9,6 +9,7 @@ module PhlexyUI
 
     def view_template(&)
       generate_classes!(
+        # "modal"
         component_html_class: :modal,
         modifiers_map: modifiers,
         base_modifiers:,
@@ -20,6 +21,7 @@ module PhlexyUI
 
     def body(*, as: :div, **options, &)
       generate_classes!(
+        # "modal-box"
         component_html_class: :"modal-box",
         options:
       ).then do |classes|
@@ -34,6 +36,7 @@ module PhlexyUI
 
     def action(*, as: :div, **options, &)
       generate_classes!(
+        # "modal-action"
         component_html_class: :"modal-action",
         options:
       ).then do |classes|
@@ -43,6 +46,7 @@ module PhlexyUI
 
     def backdrop(*, **options, &)
       generate_classes!(
+        # "modal-backdrop"
         component_html_class: :"modal-backdrop",
         options:
       ).then do |classes|
