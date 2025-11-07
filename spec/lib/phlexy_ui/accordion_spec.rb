@@ -15,8 +15,9 @@ describe PhlexyUI::Accordion do
 
   describe "with title block" do
     subject(:output) do
-      render described_class.new(name: "accordion-1") do |a|
-        a.title { "Title" }
+      accordion = described_class.new(name: "accordion-1")
+      accordion.title { "Title" }
+      render accordion do
         "Content"
       end
     end

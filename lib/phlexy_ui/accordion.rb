@@ -50,6 +50,6 @@ module PhlexyUI
       # "md:collapse-close"
       # "lg:collapse-close"
       close: "collapse-close"
-    ).freeze
+    )
   end
 end
