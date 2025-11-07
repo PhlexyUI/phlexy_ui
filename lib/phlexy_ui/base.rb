@@ -8,7 +8,9 @@ module PhlexyUI
     end
 
     class << self
-      attr_reader :modifiers
+      def modifiers
+        @modifiers ||= {}
+      end
 
       private
 
