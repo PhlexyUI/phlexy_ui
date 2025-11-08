@@ -36,7 +36,8 @@ describe PhlexyUI::Carousel do
       start: "carousel-start",
       center: "carousel-center",
       end: "carousel-end",
-      vertical: "carousel-vertical"
+      vertical: "carousel-vertical",
+      horizontal: "carousel-horizontal"
     }.each do |modifier, css|
       context "when given :#{modifier} modifier" do
         subject(:output) { render described_class.new(modifier) }

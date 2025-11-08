@@ -58,7 +58,14 @@ module PhlexyUI
       # "@md:carousel-vertical"
       # "lg:carousel-vertical"
       # "@lg:carousel-vertical"
-      vertical: "carousel-vertical"
+      vertical: "carousel-vertical",
+      # "sm:carousel-horizontal"
+      # "@sm:carousel-horizontal"
+      # "md:carousel-horizontal"
+      # "@md:carousel-horizontal"
+      # "lg:carousel-horizontal"
+      # "@lg:carousel-horizontal"
+      horizontal: "carousel-horizontal"
     )
   end
 end
