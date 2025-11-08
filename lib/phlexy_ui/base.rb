@@ -14,6 +14,11 @@ module PhlexyUI
 
       private
 
+      def inherited(subclass)
+        super
+        subclass.instance_variable_set(:@modifiers, (@modifiers || {}).dup)
+      end
+
       def register_modifiers(modifiers)
         @modifiers ||= {}
         @modifiers.merge!(modifiers)
