@@ -40,14 +40,77 @@ module PhlexyUI
       end
     end
 
-    def bubble(**options, &)
+    def bubble(*modifiers, **options, &)
       generate_classes!(
         # "chat-bubble"
         component_html_class: :"chat-bubble",
+        modifiers_map: bubble_modifiers,
+        base_modifiers: modifiers,
         options:
       ).then do |classes|
         div(class: classes, **options, &)
       end
+    end
+
+    def bubble_modifiers
+      {
+        # "sm:chat-bubble-neutral"
+        # "@sm:chat-bubble-neutral"
+        # "md:chat-bubble-neutral"
+        # "@md:chat-bubble-neutral"
+        # "lg:chat-bubble-neutral"
+        # "@lg:chat-bubble-neutral"
+        neutral: "chat-bubble-neutral",
+        # "sm:chat-bubble-primary"
+        # "@sm:chat-bubble-primary"
+        # "md:chat-bubble-primary"
+        # "@md:chat-bubble-primary"
+        # "lg:chat-bubble-primary"
+        # "@lg:chat-bubble-primary"
+        primary: "chat-bubble-primary",
+        # "sm:chat-bubble-secondary"
+        # "@sm:chat-bubble-secondary"
+        # "md:chat-bubble-secondary"
+        # "@md:chat-bubble-secondary"
+        # "lg:chat-bubble-secondary"
+        # "@lg:chat-bubble-secondary"
+        secondary: "chat-bubble-secondary",
+        # "sm:chat-bubble-accent"
+        # "@sm:chat-bubble-accent"
+        # "md:chat-bubble-accent"
+        # "@md:chat-bubble-accent"
+        # "lg:chat-bubble-accent"
+        # "@lg:chat-bubble-accent"
+        accent: "chat-bubble-accent",
+        # "sm:chat-bubble-info"
+        # "@sm:chat-bubble-info"
+        # "md:chat-bubble-info"
+        # "@md:chat-bubble-info"
+        # "lg:chat-bubble-info"
+        # "@lg:chat-bubble-info"
+        info: "chat-bubble-info",
+        # "sm:chat-bubble-success"
+        # "@sm:chat-bubble-success"
+        # "md:chat-bubble-success"
+        # "@md:chat-bubble-success"
+        # "lg:chat-bubble-success"
+        # "@lg:chat-bubble-success"
+        success: "chat-bubble-success",
+        # "sm:chat-bubble-warning"
+        # "@sm:chat-bubble-warning"
+        # "md:chat-bubble-warning"
+        # "@md:chat-bubble-warning"
+        # "lg:chat-bubble-warning"
+        # "@lg:chat-bubble-warning"
+        warning: "chat-bubble-warning",
+        # "sm:chat-bubble-error"
+        # "@sm:chat-bubble-error"
+        # "md:chat-bubble-error"
+        # "@md:chat-bubble-error"
+        # "lg:chat-bubble-error"
+        # "@lg:chat-bubble-error"
+        error: "chat-bubble-error"
+      }
     end
 
     def footer(**options, &)

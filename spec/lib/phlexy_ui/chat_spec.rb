@@ -54,6 +54,37 @@ describe PhlexyUI::Chat do
     end
   end
 
+  describe "bubble colors" do
+    {
+      primary: "chat-bubble-primary",
+      secondary: "chat-bubble-secondary",
+      accent: "chat-bubble-accent",
+      neutral: "chat-bubble-neutral",
+      info: "chat-bubble-info",
+      success: "chat-bubble-success",
+      warning: "chat-bubble-warning",
+      error: "chat-bubble-error"
+    }.each do |color, css|
+      context "when bubble is given :#{color} modifier" do
+        subject(:output) do
+          render described_class.new do |c|
+            c.bubble(color) { "Message" }
+          end
+        end
+
+        it "renders bubble with color class" do
+          expected_html = html <<~HTML
+            <div class="chat">
+              <div class="chat-bubble #{css}">Message</div>
+            </div>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+    end
+  end
+
   describe "data" do
     subject(:output) do
       render described_class.new(data: {foo: "bar"})
