@@ -52,6 +52,37 @@ describe PhlexyUI::Steps do
     end
   end
 
+  describe "step colors" do
+    {
+      neutral: "step-neutral",
+      primary: "step-primary",
+      secondary: "step-secondary",
+      accent: "step-accent",
+      info: "step-info",
+      success: "step-success",
+      warning: "step-warning",
+      error: "step-error"
+    }.each do |color, css|
+      context "when step is given :#{color} modifier" do
+        subject(:output) do
+          render described_class.new do |s|
+            s.step(color) { "Step 1" }
+          end
+        end
+
+        it "renders step with color class" do
+          expected_html = html <<~HTML
+            <ul class="steps">
+              <li class="step #{css}">Step 1</li>
+            </ul>
+          HTML
+
+          expect(output).to eq(expected_html)
+        end
+      end
+    end
+  end
+
   describe "data" do
     subject(:output) do
       render described_class.new(data: {foo: "bar"})
