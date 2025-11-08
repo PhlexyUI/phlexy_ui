@@ -31,34 +31,69 @@ describe PhlexyUI::List do
     end
   end
 
-  describe "conditions" do
-    {
-      col_wrap: "list-col-wrap",
-      col_grow: "list-col-grow"
-    }.each do |modifier, css|
-      context "when given :#{modifier} modifier" do
-        subject(:output) { render described_class.new(modifier) }
-
-        it "renders it apart from the main class" do
-          expected_html = html <<~HTML
-            <ul class="list #{css}"></ul>
-          HTML
-
-          expect(output).to eq(expected_html)
+  describe "with col_wrap method" do
+    subject(:output) do
+      render described_class.new do |l|
+        l.row do
+          l.col_wrap { "Wrapping content" }
         end
       end
     end
 
-    context "when given multiple conditions" do
-      subject(:output) { render described_class.new(:col_wrap, :col_grow) }
+    it "renders col_wrap inside row" do
+      expected_html = html <<~HTML
+        <ul class="list">
+          <li class="list-row">
+            <div class="list-col-wrap">Wrapping content</div>
+          </li>
+        </ul>
+      HTML
 
-      it "renders them separately" do
-        expected_html = html <<~HTML
-          <ul class="list list-col-wrap list-col-grow"></ul>
-        HTML
+      expect(output).to eq(expected_html)
+    end
+  end
 
-        expect(output).to eq(expected_html)
+  describe "with col_grow method" do
+    subject(:output) do
+      render described_class.new do |l|
+        l.row do
+          l.col_grow { "Growing content" }
+        end
       end
+    end
+
+    it "renders col_grow inside row" do
+      expected_html = html <<~HTML
+        <ul class="list">
+          <li class="list-row">
+            <div class="list-col-grow">Growing content</div>
+          </li>
+        </ul>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
+
+  describe "with col_grow custom element" do
+    subject(:output) do
+      render described_class.new do |l|
+        l.row do
+          l.col_grow(as: :span) { "Growing content" }
+        end
+      end
+    end
+
+    it "renders col_grow as specified element" do
+      expected_html = html <<~HTML
+        <ul class="list">
+          <li class="list-row">
+            <span class="list-col-grow">Growing content</span>
+          </li>
+        </ul>
+      HTML
+
+      expect(output).to eq(expected_html)
     end
   end
 
@@ -76,21 +111,27 @@ describe PhlexyUI::List do
     end
   end
 
-  describe "responsiveness" do
-    %i[sm md lg xl @sm @md @lg @xl].each do |viewport|
-      context "when given an :#{viewport} responsive option" do
-        subject(:output) do
-          render described_class.new(:col_wrap, responsive: {viewport => :col_grow})
-        end
-
-        it "renders it separately with a responsive prefix" do
-          expected_html = html <<~HTML
-            <ul class="list list-col-wrap #{viewport}:list-col-grow"></ul>
-          HTML
-
-          expect(output).to eq(expected_html)
+  describe "with both col_wrap and col_grow in same row" do
+    subject(:output) do
+      render described_class.new do |l|
+        l.row do
+          l.col_grow { "Growing content" }
+          l.col_wrap { "Wrapping content" }
         end
       end
+    end
+
+    it "renders both column types in one row" do
+      expected_html = html <<~HTML
+        <ul class="list">
+          <li class="list-row">
+            <div class="list-col-grow">Growing content</div>
+            <div class="list-col-wrap">Wrapping content</div>
+          </li>
+        </ul>
+      HTML
+
+      expect(output).to eq(expected_html)
     end
   end
 

@@ -30,21 +30,24 @@ module PhlexyUI
       end
     end
 
-    register_modifiers(
-      # "sm:list-col-wrap"
-      # "@sm:list-col-wrap"
-      # "md:list-col-wrap"
-      # "@md:list-col-wrap"
-      # "lg:list-col-wrap"
-      # "@lg:list-col-wrap"
-      col_wrap: "list-col-wrap",
-      # "sm:list-col-grow"
-      # "@sm:list-col-grow"
-      # "md:list-col-grow"
-      # "@md:list-col-grow"
-      # "lg:list-col-grow"
-      # "@lg:list-col-grow"
-      col_grow: "list-col-grow"
-    )
+    def col_wrap(as: :div, **options, &)
+      generate_classes!(
+        # "list-col-wrap"
+        component_html_class: :"list-col-wrap",
+        options:
+      ).then do |classes|
+        public_send(as, class: classes, **options, &)
+      end
+    end
+
+    def col_grow(as: :div, **options, &)
+      generate_classes!(
+        # "list-col-grow"
+        component_html_class: :"list-col-grow",
+        options:
+      ).then do |classes|
+        public_send(as, class: classes, **options, &)
+      end
+    end
   end
 end
