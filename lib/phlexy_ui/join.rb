@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module PhlexyUI
-  # @component html class="join"
   class Join < Base
     def initialize(*, as: :div, **)
       super(*, **)
