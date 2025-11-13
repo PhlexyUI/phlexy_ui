@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module PhlexyUI
-  # @component html class="status"
   class Status < Base
     def initialize(*, as: :span, **)
       super(*, **)
