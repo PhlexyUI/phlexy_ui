@@ -95,4 +95,56 @@ describe PhlexyUI::Divider do
       expect(output).to eq(expected_html)
     end
   end
+
+  describe "rendering via Kit" do
+    subject(:output) do
+      Divider :horizontal, data: {foo: "bar"}, class: "my-divider"
+    end
+
+    it "renders it correctly" do
+      expected_html = html <<~HTML
+        <div class="divider divider-horizontal my-divider" data-foo="bar"></div>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
+
+  describe "rendering a full divider" do
+    let(:component) do
+      Class.new(Phlex::HTML) do
+        def view_template(&)
+          div(class: "flex w-full") do
+            render PhlexyUI::Divider.new(:horizontal, data: {foo: "bar"}, class: "my-divider")
+            render PhlexyUI::Divider.new(:horizontal, :start) do
+              "Start"
+            end
+            render PhlexyUI::Divider.new(:horizontal) do
+              "Default"
+            end
+            render PhlexyUI::Divider.new(:horizontal, :end) do
+              "End"
+            end
+          end
+        end
+      end
+    end
+
+    subject(:output) do
+      render component.new
+    end
+
+    it "renders it correctly" do
+      expected_html = html <<~HTML
+        <div class="flex w-full">
+          <div class="divider divider-horizontal my-divider" data-foo="bar"></div>
+          <div class="divider divider-horizontal divider-start">Start</div>
+          <div class="divider divider-horizontal">Default</div>
+          <div class="divider divider-horizontal divider-end">End</div>
+        </div>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
 end
