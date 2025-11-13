@@ -96,4 +96,58 @@ describe PhlexyUI::Status do
       expect(output).to eq(expected_html)
     end
   end
+
+  describe "rendering via Kit" do
+    subject(:output) do
+      Status :primary, :lg
+    end
+
+    it "renders it correctly" do
+      expected_html = html <<~HTML
+        <span class="status status-primary status-lg"></span>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
+
+  describe "rendering a full status" do
+    let(:component) do
+      Class.new(Phlex::HTML) do
+        def view_template(&)
+          render PhlexyUI::Status.new(:primary)
+          render PhlexyUI::Status.new(:secondary)
+          render PhlexyUI::Status.new(:accent)
+          render PhlexyUI::Status.new(:neutral)
+
+          render PhlexyUI::Status.new(:info)
+          render PhlexyUI::Status.new(:success)
+          render PhlexyUI::Status.new(:warning)
+          render PhlexyUI::Status.new(:error)
+          render PhlexyUI::Status.new
+        end
+      end
+    end
+
+    subject(:output) do
+      render component.new
+    end
+
+    it "renders it correctly" do
+      expected_html = html <<~HTML
+        <span class="status status-primary"></span>
+        <span class="status status-secondary"></span>
+        <span class="status status-accent"></span>
+        <span class="status status-neutral"></span>
+
+        <span class="status status-info"></span>
+        <span class="status status-success"></span>
+        <span class="status status-warning"></span>
+        <span class="status status-error"></span>
+        <span class="status"></span>
+      HTML
+
+      expect(output).to eq(expected_html)
+    end
+  end
 end
