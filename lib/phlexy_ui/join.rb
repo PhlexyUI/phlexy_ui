@@ -29,6 +29,8 @@ module PhlexyUI
       end
     end
 
+    private
+
     register_modifiers(
       # "sm:join-vertical"
       # "@sm:join-vertical"

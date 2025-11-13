@@ -19,6 +19,8 @@ module PhlexyUI
       end
     end
 
+    private
+
     register_modifiers(
       # "sm:divider-vertical"
       # "@sm:divider-vertical"
